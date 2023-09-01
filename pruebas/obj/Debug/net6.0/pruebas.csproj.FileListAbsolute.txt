@@ -1,0 +1,15 @@
+C:\Users\PC\Desktop\Prog-Lab_II\Delgado.Augusto.EjercicioIntegrador\pruebas\bin\Debug\net6.0\pruebas.exe
+C:\Users\PC\Desktop\Prog-Lab_II\Delgado.Augusto.EjercicioIntegrador\pruebas\bin\Debug\net6.0\pruebas.deps.json
+C:\Users\PC\Desktop\Prog-Lab_II\Delgado.Augusto.EjercicioIntegrador\pruebas\bin\Debug\net6.0\pruebas.runtimeconfig.json
+C:\Users\PC\Desktop\Prog-Lab_II\Delgado.Augusto.EjercicioIntegrador\pruebas\bin\Debug\net6.0\pruebas.dll
+C:\Users\PC\Desktop\Prog-Lab_II\Delgado.Augusto.EjercicioIntegrador\pruebas\bin\Debug\net6.0\pruebas.pdb
+C:\Users\PC\Desktop\Prog-Lab_II\Delgado.Augusto.EjercicioIntegrador\pruebas\obj\Debug\net6.0\pruebas.csproj.AssemblyReference.cache
+C:\Users\PC\Desktop\Prog-Lab_II\Delgado.Augusto.EjercicioIntegrador\pruebas\obj\Debug\net6.0\pruebas.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\PC\Desktop\Prog-Lab_II\Delgado.Augusto.EjercicioIntegrador\pruebas\obj\Debug\net6.0\pruebas.AssemblyInfoInputs.cache
+C:\Users\PC\Desktop\Prog-Lab_II\Delgado.Augusto.EjercicioIntegrador\pruebas\obj\Debug\net6.0\pruebas.AssemblyInfo.cs
+C:\Users\PC\Desktop\Prog-Lab_II\Delgado.Augusto.EjercicioIntegrador\pruebas\obj\Debug\net6.0\pruebas.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\Prog-Lab_II\Delgado.Augusto.EjercicioIntegrador\pruebas\obj\Debug\net6.0\pruebas.dll
+C:\Users\PC\Desktop\Prog-Lab_II\Delgado.Augusto.EjercicioIntegrador\pruebas\obj\Debug\net6.0\refint\pruebas.dll
+C:\Users\PC\Desktop\Prog-Lab_II\Delgado.Augusto.EjercicioIntegrador\pruebas\obj\Debug\net6.0\pruebas.pdb
+C:\Users\PC\Desktop\Prog-Lab_II\Delgado.Augusto.EjercicioIntegrador\pruebas\obj\Debug\net6.0\pruebas.genruntimeconfig.cache
+C:\Users\PC\Desktop\Prog-Lab_II\Delgado.Augusto.EjercicioIntegrador\pruebas\obj\Debug\net6.0\ref\pruebas.dll
