@@ -29,6 +29,8 @@ namespace Entidades
             
         }
 
+       
+
         /// <summary>
         /// Este retornara una cadena representada en un sistema de numeración basado en el parámetro recibido.
         /// </summary>
@@ -152,7 +154,47 @@ namespace Entidades
         }
 
 
-       /* public string ValorNumerico { get =>;*/
+        public static Numeracion operator +(Numeracion primerOperador , Numeracion segundoOperador)
+        {
+            bool result = false;
+
+          
+
+        }
+
+        public static Numeracion operator -(Numeracion primerOperador, Numeracion segundoOperador)
+        {
+            
+            
+            
+        }
+        
+        public static Numeracion operator *(Numeracion primerOperador, Numeracion segundoOperador)
+        {
+           
+            
+            
+        }
+        
+        public static Numeracion operator /(Numeracion primerOperador, Numeracion segundoOperador)
+        {
+           
+
+        }
+        public static bool operator ==(Numeracion primerOperador, Numeracion segundoOperador)
+        {
+            
+            return primerOperador is not null && segundoOperador is not null &&
+             primerOperador.valorNumerico == segundoOperador.valorNumerico &&
+             primerOperador.sistema == segundoOperador.sistema;
+        }
+        public static bool operator !=(Numeracion primerOperador, Numeracion segundoOperador)
+        {
+            return !(primerOperador == segundoOperador);
+        }
+
+
+        /* public string ValorNumerico { get =>;*/
         public ESistema Sistema { get => sistema;  }
     }
 }

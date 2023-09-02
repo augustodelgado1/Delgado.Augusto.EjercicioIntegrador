@@ -1,0 +1,31 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Delgado.Augusto.EjercicioIntegrador/1.0.0": {
+        "runtime": {
+          "Delgado.Augusto.EjercicioIntegrador.dll": {}
+        },
+        "resources": {
+          "es-AR/Delgado.Augusto.EjercicioIntegrador.resources.dll": {
+            "locale": "es-AR"
+          },
+          "zu/Delgado.Augusto.EjercicioIntegrador.resources.dll": {
+            "locale": "zu"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Delgado.Augusto.EjercicioIntegrador/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

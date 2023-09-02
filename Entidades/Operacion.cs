@@ -17,17 +17,33 @@ namespace Entidades
             this.segundoOperador = segundoOperador;
         }
 
-        /*public Numeracion Operador(char operador)
+        public Numeracion Operador(char operador)
         {
-            Numeracion resultado;
+            Numeracion resultado = null;
 
-            if (operador == '+')
+            switch (operador)
             {
-                resultado = this.primerOperador + this.segundoOperador;
+                case '*':
+                    this.primerOperador * this.segundoOperador;
+                    break;
+                
+                case '-':
+                    this.primerOperador - this.segundoOperador;
+                    break;
+
+                case '/':
+                    this.primerOperador / this.segundoOperador;
+                    break;
+
+                default:
+                    this.primerOperador + this.segundoOperador;
+                    break;
             }
 
             return resultado;
-        }*/
+        }
+
+        
 
         public Numeracion PrimerOperador { get => primerOperador; set => primerOperador = value; }
         public Numeracion SegundoOperador { get => segundoOperador; set => segundoOperador = value; }
