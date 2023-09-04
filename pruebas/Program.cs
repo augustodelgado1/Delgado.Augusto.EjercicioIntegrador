@@ -1,13 +1,21 @@
 ﻿using System.Drawing;
-
+using Entidades;
 namespace pruebas
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            string number;
+            double unNumero;
+            Console.WriteLine();
+
+            number = DecimalBinario(34);
+            number.Reverse();
             
-            Console.WriteLine(BinarioDecimal(DecimalBinario(745))); 
+            BinarioDecimal(number);
+            
+
         }
 
         private static string DecimalBinario(int valor)

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Delgado.Augusto.EjercicioIntegrador", "Delgado.Augusto.EjercicioIntegrador\Delgado.Augusto.EjercicioIntegrador.csproj", "{E96B9F12-FDB1-4922-A732-A4A5DC1C16E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Delgado.Augusto.EjercicioIntegrador", "Delgado.Augusto.EjercicioIntegrador\Delgado.Augusto.EjercicioIntegrador.csproj", "{E96B9F12-FDB1-4922-A732-A4A5DC1C16E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Entidades.csproj", "{C21A1B6D-5959-460C-82E8-328D9635FD74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entidades", "Entidades\Entidades.csproj", "{C21A1B6D-5959-460C-82E8-328D9635FD74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pruebas", "pruebas\pruebas.csproj", "{79494D52-1257-45D4-952F-1C557CCC4733}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pruebas", "pruebas\pruebas.csproj", "{79494D52-1257-45D4-952F-1C557CCC4733}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

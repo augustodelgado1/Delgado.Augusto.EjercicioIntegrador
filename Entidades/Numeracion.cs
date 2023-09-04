@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Runtime.Intrinsics.Arm;
+using System.Text;
 
 namespace Entidades
 {
@@ -13,23 +14,25 @@ namespace Entidades
     {
         private ESistema sistema;
         private double valorNumerico;
-        private void InicializarValores(double valorNumerico, ESistema sistema)
+        private void InicializarValores(string valorNumerico, ESistema sistema)
         {
-            this.sistema = sistema;
-            this.valorNumerico = valorNumerico;
-        }
-        public Numeracion(double valorNumerico, ESistema sistema)
-        {
-            InicializarValores(valorNumerico,sistema);
-        }
-
-        public Numeracion(string valor, ESistema sistema)
-        {
-            
-            
+            int unNumero;
+            if (int.TryParse(valorNumerico, out unNumero) == true)
+            {
+                this.sistema = sistema;
+                this.valorNumerico = unNumero;
+            }
         }
 
-       
+        public Numeracion(double valorNumerico, ESistema sistema) : this(valorNumerico.ToString(), sistema)
+        {
+
+        }
+
+        public Numeracion(string valor, ESistema sistema) 
+        {
+            InicializarValores(valor, sistema);
+        }
 
         /// <summary>
         /// Este retornara una cadena representada en un sistema de numeración basado en el parámetro recibido.
@@ -39,22 +42,22 @@ namespace Entidades
         public string ConvertirA(ESistema sistema)
         {
             string result = null;
-/*
+
             if (sistema == ESistema.Decimal)
             {
                 result = BinarioDecimal(this.valorNumerico.ToString()).ToString();
             }
             else
             {
-                if(sistema == ESistema.Binario)
+                if (sistema == ESistema.Binario)
                 {
-                    result = DecimalBinario(this.ValorNumerico);
+                    result = DecimalBinario(this.valorNumerico.ToString());
                 }
-            }*/
+            }
 
             return result;
 
-        }
+        } 
 
         /// <summary>
         /// Valida que la cadena de caracteres sea un numero binario
@@ -105,6 +108,8 @@ namespace Entidades
                         contador++;
                     }
                 }
+
+                this.InicializarValores(resultDecimal.ToString(), ESistema.Decimal);
             }
             return resultDecimal;
         }
@@ -112,14 +117,16 @@ namespace Entidades
         /// convertirán un número decimal a binario Caso contrario retornará
         /// "-1". 
         /// 
-        /// <param name="valor"></param>
-        /// <returns></returns>
+        /// <param name="valor">un numero </param>
+        /// 
+        /// <returns> un número decimal a binario Caso contrario retornará
+        /// "-1" </returns>
         private string DecimalBinario(string valorStr)
         {
             string result = null;
             int valorInt;
 
-            if (string.IsNullOrEmpty(valorStr) != false
+            if (string.IsNullOrEmpty(valorStr) != true
               && int.TryParse(valorStr, out valorInt))
             {
                 result = DecimalBinario(valorInt);
@@ -130,60 +137,67 @@ namespace Entidades
 
         private string DecimalBinario(int valor)
         {
-            string result = string.Empty;
+            StringBuilder result = new StringBuilder();
             int resultadoDeLadivision;
             int resultadoDeLaMultiplicacion;
+            string retorno = null;
 
             do
             {
                 resultadoDeLadivision = valor / 2;
                 resultadoDeLaMultiplicacion = 2 * resultadoDeLadivision;
-                result += (valor - resultadoDeLaMultiplicacion).ToString();
+                result.Append(valor - resultadoDeLaMultiplicacion);
                 valor = resultadoDeLadivision;
 
                 if (valor == 0 || valor == 1)
                 {
-                    result += valor;
-                    result.Reverse();
+                    result.Append(valor);
+                    retorno = result.ToString();
+                    retorno.Reverse();
+                    this.sistema = ESistema.Binario;
                     break;
                 }
 
             } while (true);
 
-            return result;
+            return retorno;
         }
 
-
-        public static Numeracion operator +(Numeracion primerOperador , Numeracion segundoOperador)
+        public static bool operator == (Numeracion unNumero,ESistema unSitemaNumerico)
         {
-            bool result = false;
+            return unNumero.Sistema == unSitemaNumerico;
+        } 
+        
+        public static bool operator != (Numeracion primerOperador,ESistema unSitemaNumerico)
+        {
+            return !(primerOperador == unSitemaNumerico);
+        }
 
-          
-
+        public static Numeracion operator +(Numeracion primerOperador, Numeracion segundoOperador)
+        {
+            return new Numeracion(primerOperador.valorNumerico + segundoOperador.valorNumerico
+                 , ESistema.Decimal);
         }
 
         public static Numeracion operator -(Numeracion primerOperador, Numeracion segundoOperador)
         {
-            
-            
-            
+            return new Numeracion(primerOperador.valorNumerico - segundoOperador.valorNumerico
+                 ,ESistema.Decimal);
         }
-        
+
         public static Numeracion operator *(Numeracion primerOperador, Numeracion segundoOperador)
         {
-           
-            
-            
+            return new Numeracion(primerOperador.valorNumerico * segundoOperador.valorNumerico
+                 , ESistema.Decimal);
         }
-        
+
         public static Numeracion operator /(Numeracion primerOperador, Numeracion segundoOperador)
         {
-           
-
+            return new Numeracion(primerOperador.valorNumerico / segundoOperador.valorNumerico
+                 , ESistema.Decimal);
         }
         public static bool operator ==(Numeracion primerOperador, Numeracion segundoOperador)
         {
-            
             return primerOperador is not null && segundoOperador is not null &&
              primerOperador.valorNumerico == segundoOperador.valorNumerico &&
              primerOperador.sistema == segundoOperador.sistema;
@@ -194,7 +208,34 @@ namespace Entidades
         }
 
 
-        /* public string ValorNumerico { get =>;*/
-        public ESistema Sistema { get => sistema;  }
+        public string ValorNumerico
+        {
+            get {
+                string resultado ;
+
+                resultado = this.valorNumerico.ToString();
+
+                if (this.sistema == ESistema.Binario)
+                {
+                   
+                }
+
+                return resultado;
+            }
+        }
+        public ESistema Sistema {
+
+            get
+            {
+                this.sistema = ESistema.Decimal;
+
+                if (this.EsBinario(this.valorNumerico.ToString()) == true)
+                {
+                    this.sistema = ESistema.Binario;
+                }
+
+                return this.sistema;
+            }
+        }
     }
 }

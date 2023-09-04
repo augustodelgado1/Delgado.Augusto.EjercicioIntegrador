@@ -21,3 +21,6 @@ C:\Users\PC\Desktop\Delgado.Augusto.EjercicioIntegrador\Delgado.Augusto.Ejercici
 C:\Users\PC\Desktop\Delgado.Augusto.EjercicioIntegrador\Delgado.Augusto.EjercicioIntegrador\obj\Debug\net6.0-windows\Delgado.Augusto.EjercicioIntegrador.pdb
 C:\Users\PC\Desktop\Delgado.Augusto.EjercicioIntegrador\Delgado.Augusto.EjercicioIntegrador\obj\Debug\net6.0-windows\Delgado.Augusto.EjercicioIntegrador.genruntimeconfig.cache
 C:\Users\PC\Desktop\Delgado.Augusto.EjercicioIntegrador\Delgado.Augusto.EjercicioIntegrador\obj\Debug\net6.0-windows\ref\Delgado.Augusto.EjercicioIntegrador.dll
+C:\Users\PC\Desktop\Delgado.Augusto.EjercicioIntegrador\Delgado.Augusto.EjercicioIntegrador\bin\Debug\net6.0-windows\Entidades.dll
+C:\Users\PC\Desktop\Delgado.Augusto.EjercicioIntegrador\Delgado.Augusto.EjercicioIntegrador\bin\Debug\net6.0-windows\Entidades.pdb
+C:\Users\PC\Desktop\Delgado.Augusto.EjercicioIntegrador\Delgado.Augusto.EjercicioIntegrador\obj\Debug\net6.0-windows\Delgado.Augusto.EjercicioIntegrador.csproj.CopyComplete

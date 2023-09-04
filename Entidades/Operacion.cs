@@ -24,21 +24,22 @@ namespace Entidades
             switch (operador)
             {
                 case '*':
-                    this.primerOperador * this.segundoOperador;
+                    resultado = this.primerOperador * this.segundoOperador;
                     break;
-                
+
                 case '-':
-                    this.primerOperador - this.segundoOperador;
+                    resultado = this.primerOperador - this.segundoOperador;
                     break;
 
                 case '/':
-                    this.primerOperador / this.segundoOperador;
+                    resultado = this.primerOperador / this.segundoOperador;
                     break;
 
                 default:
-                    this.primerOperador + this.segundoOperador;
+                    resultado = this.primerOperador + this.segundoOperador;
                     break;
             }
+
 
             return resultado;
         }

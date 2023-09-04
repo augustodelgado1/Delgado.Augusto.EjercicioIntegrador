@@ -59,7 +59,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnOperar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 256</value>
+    <value>12, 311</value>
   </data>
   <data name="btnOperar.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 40</value>
@@ -69,28 +69,34 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="btnLimpiar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 256</value>
+    <value>218, 311</value>
   </data>
   <data name="btnLimpiar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 40</value>
+    <value>152, 40</value>
   </data>
   <data name="btnCerrar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
   </data>
   <data name="btnCerrar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>441, 256</value>
+    <value>441, 311</value>
   </data>
   <data name="btnCerrar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 40</value>
+    <value>163, 40</value>
   </data>
   <data name="cmbOperacion.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
   </data>
+  <data name="cmbOperacion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>220, 265</value>
+  </data>
   <data name="cmbOperacion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 23</value>
+    <value>150, 23</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>277, 9</value>
   </data>
   <data name="lblPrimerOperador.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
+    <value>Bottom, Left</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblPrimerOperador.AutoSize" type="System.Boolean, mscorlib">
@@ -99,6 +105,9 @@
   <data name="lblPrimerOperador.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 14pt</value>
   </data>
+  <data name="lblPrimerOperador.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 217</value>
+  </data>
   <data name="lblPrimerOperador.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 25</value>
   </data>
@@ -106,7 +115,7 @@
     <value>Primer Operador</value>
   </data>
   <data name="lblOperacion.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
+    <value>Bottom, Left</value>
   </data>
   <data name="lblOperacion.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -114,17 +123,23 @@
   <data name="lblOperacion.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 14pt</value>
   </data>
+  <data name="lblOperacion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>218, 217</value>
+  </data>
   <data name="lblOperacion.Text" xml:space="preserve">
     <value>Operacion</value>
   </data>
   <data name="lblSegundoOperador.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
+    <value>Bottom, Right</value>
   </data>
   <data name="lblSegundoOperador.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblSegundoOperador.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 14pt</value>
+  </data>
+  <data name="lblSegundoOperador.Location" type="System.Drawing.Point, System.Drawing">
+    <value>400, 217</value>
   </data>
   <data name="lblSegundoOperador.Size" type="System.Drawing.Size, System.Drawing">
     <value>177, 25</value>
@@ -136,10 +151,13 @@
     <value>True</value>
   </data>
   <data name="rdbBinario.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt</value>
+    <value>Arial, 12pt</value>
+  </data>
+  <data name="rdbBinario.Location" type="System.Drawing.Point, System.Drawing">
+    <value>138, 39</value>
   </data>
   <data name="rdbBinario.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 23</value>
+    <value>76, 22</value>
   </data>
   <data name="rdbBinario.Text" xml:space="preserve">
     <value>Binario</value>
@@ -148,16 +166,22 @@
     <value>True</value>
   </data>
   <data name="rdbDecimal.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt</value>
+    <value>Arial, 12pt</value>
+  </data>
+  <data name="rdbDecimal.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 39</value>
   </data>
   <data name="rdbDecimal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>84, 22</value>
   </data>
   <data name="rdbDecimal.Text" xml:space="preserve">
     <value>Decimal</value>
   </data>
+  <data name="grpSistema.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 72</value>
+  </data>
   <data name="grpSistema.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 61</value>
+    <value>255, 95</value>
   </data>
   <data name="grpSistema.Text" xml:space="preserve">
     <value>Representar Resultado en</value>
@@ -165,20 +189,26 @@
   <data name="txtSegundoOperador.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
   </data>
+  <data name="txtSegundoOperador.Location" type="System.Drawing.Point, System.Drawing">
+    <value>441, 265</value>
+  </data>
   <data name="txtSegundoOperador.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 23</value>
+    <value>163, 23</value>
   </data>
   <data name="txtPrimerOperador.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
   </data>
+  <data name="txtPrimerOperador.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 265</value>
+  </data>
   <data name="txtPrimerOperador.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 23</value>
+    <value>131, 23</value>
   </data>
   <data name="$this.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>625, 308</value>
+    <value>616, 363</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Calculadora de Augusto Delgado</value>

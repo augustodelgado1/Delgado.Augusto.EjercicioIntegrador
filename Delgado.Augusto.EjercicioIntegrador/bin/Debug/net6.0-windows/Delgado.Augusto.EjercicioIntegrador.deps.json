@@ -7,6 +7,9 @@
   "targets": {
     ".NETCoreApp,Version=v6.0": {
       "Delgado.Augusto.EjercicioIntegrador/1.0.0": {
+        "dependencies": {
+          "Entidades": "1.0.0"
+        },
         "runtime": {
           "Delgado.Augusto.EjercicioIntegrador.dll": {}
         },
@@ -18,11 +21,21 @@
             "locale": "zu"
           }
         }
+      },
+      "Entidades/1.0.0": {
+        "runtime": {
+          "Entidades.dll": {}
+        }
       }
     }
   },
   "libraries": {
     "Delgado.Augusto.EjercicioIntegrador/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Entidades/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
