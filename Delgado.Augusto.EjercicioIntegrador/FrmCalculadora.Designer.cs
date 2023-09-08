@@ -134,7 +134,7 @@
             // 
             grpSistema.Controls.Add(rdbBinario);
             grpSistema.Controls.Add(rdbDecimal);
-            grpSistema.Location = new Point(285, 82);
+            grpSistema.Location = new Point(272, 70);
             grpSistema.Name = "grpSistema";
             grpSistema.Size = new Size(263, 103);
             grpSistema.TabIndex = 8;

@@ -8,12 +8,11 @@ namespace pruebas
         {
             string number;
             double unNumero;
-            Console.WriteLine();
+            Numeracion unBinario = new Numeracion("100010", ESistema.Binario);
 
-            number = DecimalBinario(34);
-            number.Reverse();
-            
-            BinarioDecimal(number);
+            Console.WriteLine(unBinario == ESistema.Decimal);
+            Console.WriteLine(unBinario == ESistema.Binario);
+            Console.WriteLine(new Numeracion(2, ESistema.Binario) == ESistema.Binario);
             
 
         }

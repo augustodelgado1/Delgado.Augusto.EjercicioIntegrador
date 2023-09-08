@@ -5,29 +5,27 @@ using System.Diagnostics;
 using System.Runtime.ConstrainedExecution;
 using System.Windows.Forms;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Delgado.Augusto.EjercicioIntegrador
 {
     public partial class FrmCalculadora : Form
     {
+        char[] listaDeOperadores = { '+', '-', '*', '/' };
         Operacion calculadora;
         ESistema sistema;
         Numeracion resultado;
-        string resultadoBinario;
-        double resultadoDecimal;
         Numeracion primerOperando;
         Numeracion segundoOperando;
+        StringBuilder stringBuilder = new StringBuilder();
+        
         public FrmCalculadora()
         {
             InitializeComponent();
-            this.cmbOperacion.Items.Add('+');
-            this.cmbOperacion.Items.Add('-');
-            this.cmbOperacion.Items.Add('*');
-            this.cmbOperacion.Items.Add('/');
+            CargarCmbItems(this.cmbOperacion.Items, listaDeOperadores);
             rdbDecimal.Checked = true;
             this.cmbOperacion.SelectedItem = '+';
         }
-
         private void FrmCalculadora_Load(object sender, EventArgs e)
         {
 
@@ -35,13 +33,27 @@ namespace Delgado.Augusto.EjercicioIntegrador
 
         private void btnOperar_Click(object sender, EventArgs e)
         {
-            if (cmbOperacion.SelectedItem is not null
-             && cmbOperacion.SelectedItem is char
-             && DetectarTextBoxVacio(this.Controls) == true && 
-             primerOperando is not null
-             && segundoOperando is not null)
+            bool respuesta;
+            respuesta = DetectarTextBoxVacio(this.Controls);
+
+            if (respuesta == false)
+            {
+                primerOperando = new Numeracion(txtPrimerOperador.Text, sistema);
+                segundoOperando = new Numeracion(txtSegundoOperador.Text, sistema);
+            }
+
+            if (cmbOperacion.SelectedItem is not null && cmbOperacion.SelectedItem is char
+             && respuesta == true && primerOperando is not null && segundoOperando is not null)
             {
                 SetResultado();
+            }
+            else
+            {
+                if (respuesta == false)
+                {
+                    stringBuilder.Clear();
+                    stringBuilder.AppendLine($"Debe ingresar un numero");
+                }
             }
         }
 
@@ -58,6 +70,50 @@ namespace Delgado.Augusto.EjercicioIntegrador
             }
         }
 
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void FrmCalculadora_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = MostrarMensajeAntesDeCerrarLaAplicacion("¿Desea cerrar la calculadora?", "Salida");
+        }
+
+        private void txtPrimerOperador_TextChanged(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void txtSegundoOperador_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void rdbBinario_CheckedChanged(object sender, EventArgs e)
+        {
+            
+            if (rdbBinario.Checked == true)
+            {
+                sistema = ESistema.Binario;
+                rdbDecimal.Checked = false;
+               /* this.lblResultado.Text = $"Resultado : {resultado.ValorNumerico}";*/
+            }
+        }
+
+        private void rdbDecimal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbDecimal.Checked == true)
+            {
+                sistema = ESistema.Decimal;
+                rdbBinario.Checked = false;
+                /*this.lblResultado.Text = $"Resultado : {resultado.ValorNumerico}";*/
+            }
+
+        }
+
+
+        #region Metodos
         private void LimpiarPantalla()
         {
             LimpiarListaDeTextBox(this.Controls);
@@ -67,7 +123,7 @@ namespace Delgado.Augusto.EjercicioIntegrador
             if (resultado is not null)
             {
                 resultado = null;
-                this.lblResultado.Text = $"Resultado";
+                this.lblResultado.Text = string.Empty;
             }
         }
 
@@ -106,20 +162,27 @@ namespace Delgado.Augusto.EjercicioIntegrador
 
             return resultado;
         }
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
 
-        private void FrmCalculadora_FormClosing(object sender, FormClosingEventArgs e)
+        private bool CargarCmbItems(ComboBox.ObjectCollection items, char[] listaDeOperadores)
         {
-           e.Cancel = MostrarMensajeAntesDeCerrarLaAplicacion("¿Desea cerrar la calculadora?", "Salida");
-        }
+            bool estado;
+            estado = false;
+            if (items is not null)
+            {
+                estado = true;
+                items.Clear();
+                foreach (char unOperador in listaDeOperadores)
+                {
+                    items.Add(unOperador);
+                }
+            }
 
-        private bool MostrarMensajeAntesDeCerrarLaAplicacion(string mensaje,string titulo)
+            return estado;
+        }
+        private bool MostrarMensajeAntesDeCerrarLaAplicacion(string mensaje, string titulo)
         {
             bool resultado = false;
-            if (MessageBox.Show(mensaje,titulo, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (MessageBox.Show(mensaje, titulo, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 resultado = true;
             }
@@ -127,69 +190,25 @@ namespace Delgado.Augusto.EjercicioIntegrador
             return resultado;
         }
 
-        private void txtPrimerOperador_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtPrimerOperador.Text) == false)
-            {
-                primerOperando = new Numeracion(txtPrimerOperador.Text, ESistema.Decimal);
-            }
-        }
-
-        private void txtSegundoOperador_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtSegundoOperador.Text) == false)
-            {
-                segundoOperando = new Numeracion(txtSegundoOperador.Text, ESistema.Decimal);
-            }
-        }
-
-        private void rdbBinario_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbBinario.Checked == true)
-            {
-                sistema = ESistema.Binario;
-                rdbDecimal.Checked = false;
-
-                if(resultado is not null )
-                {
-                    this.lblResultado.Text = $"Resultado : {resultadoBinario}";
-                }
-            }
-        }
-
-        private void rdbDecimal_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbDecimal.Checked == true)
-            {
-                sistema = ESistema.Decimal;
-                rdbBinario.Checked = false;
-
-                if (resultado is not null )
-                {
-                    this.lblResultado.Text = $"Resultado : {resultado.ValorNumerico}";
-                }
-            }
-            
-        }
 
         private void SetResultado()
         {
             calculadora = new Operacion(primerOperando, segundoOperando);
             resultado = calculadora.Operador((char)cmbOperacion.SelectedItem);
-            resultadoBinario = resultado.ConvertirA(ESistema.Binario);
+            stringBuilder.AppendLine($"Resultado : {resultado.ValorNumerico}");
             if (rdbBinario.Checked == true)
             {
-                this.lblResultado.Text = $"Resultado : {resultadoBinario}";
+                stringBuilder.Clear();
+                stringBuilder.AppendLine($"Resultado : {resultado.ConvertirA(sistema)}");
             }
-            else
-            {
-                this.lblResultado.Text = $"Resultado : {resultado.ValorNumerico}";
-            }
+            this.lblResultado.Text = stringBuilder.ToString();
         }
 
-        
+        #endregion
 
-       
+
+
+
 
         /*    
     7. El TabIndex debe darse de izquierda a derecha y de arriba hacia abajo, siendo
