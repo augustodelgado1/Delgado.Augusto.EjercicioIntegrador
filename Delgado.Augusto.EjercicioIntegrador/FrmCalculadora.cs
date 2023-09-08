@@ -36,14 +36,10 @@ namespace Delgado.Augusto.EjercicioIntegrador
             bool respuesta;
             respuesta = DetectarTextBoxVacio(this.Controls);
 
-            if (respuesta == false)
-            {
-                primerOperando = new Numeracion(txtPrimerOperador.Text, sistema);
-                segundoOperando = new Numeracion(txtSegundoOperador.Text, sistema);
-            }
-
-            if (cmbOperacion.SelectedItem is not null && cmbOperacion.SelectedItem is char
-             && respuesta == true && primerOperando is not null && segundoOperando is not null)
+            if (cmbOperacion.SelectedItem is not null 
+             && cmbOperacion.SelectedItem is char && respuesta == true 
+             && (primerOperando = new Numeracion(txtPrimerOperador.Text, sistema)) is not null 
+             && (segundoOperando = new Numeracion(txtSegundoOperador.Text, sistema)) is not null)
             {
                 SetResultado();
             }
@@ -66,7 +62,7 @@ namespace Delgado.Augusto.EjercicioIntegrador
             if (resultado is not null)
             {
                 resultado = null;
-                this.lblResultado.Text = $"Resultado";
+                this.lblResultado.Text = string.Empty;
             }
         }
 
@@ -92,12 +88,15 @@ namespace Delgado.Augusto.EjercicioIntegrador
 
         private void rdbBinario_CheckedChanged(object sender, EventArgs e)
         {
-            
             if (rdbBinario.Checked == true)
             {
                 sistema = ESistema.Binario;
                 rdbDecimal.Checked = false;
-               /* this.lblResultado.Text = $"Resultado : {resultado.ValorNumerico}";*/
+
+                if(resultado is not null)
+                {
+                    lblResultado.Text = $"Resultado : {resultado.ConvertirA(sistema)}";
+                }
             }
         }
 
@@ -107,7 +106,13 @@ namespace Delgado.Augusto.EjercicioIntegrador
             {
                 sistema = ESistema.Decimal;
                 rdbBinario.Checked = false;
-                /*this.lblResultado.Text = $"Resultado : {resultado.ValorNumerico}";*/
+
+
+                if (resultado is not null)
+                {
+                    lblResultado.Text = $"Resultado : {resultado.ConvertirA(sistema)}";
+                }
+
             }
 
         }

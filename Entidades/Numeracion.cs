@@ -128,7 +128,6 @@ namespace Entidades
         private double BinarioDecimal(string valor)
         {
             double resultDecimal = -1;
-            
             int contador;
             int unNumero;
             contador = 0;
@@ -174,8 +173,7 @@ namespace Entidades
             StringBuilder result = new StringBuilder();
             int resultadoDeLadivision;
             int resultadoDeLaMultiplicacion;
-            string retorno = null;
-
+            char[] arr = null;
             do
             {
                 resultadoDeLadivision = valor / 2;
@@ -186,23 +184,23 @@ namespace Entidades
                 if (valor == 0 || valor == 1)
                 {
                     result.Append(valor);
-                    retorno = result.ToString();
-                    retorno.Reverse();
+                    arr = result.ToString().ToCharArray();
+                    Array.Reverse(arr);
                     break;
                 }
 
             } while (true);
 
-            return retorno;
+            return new string(arr);
         }
 
         public static bool operator == (Numeracion unNumero,ESistema unSitemaNumerico)
         {
             bool respuesta;
             respuesta = EsBinario(unNumero.valorNumerico.ToString());
-            if (unSitemaNumerico == ESistema.Decimal && respuesta == true)
+            if (unSitemaNumerico == ESistema.Decimal && respuesta == false)
             {
-                respuesta = false;
+                respuesta = true;
             }
 
             return respuesta;
@@ -218,7 +216,7 @@ namespace Entidades
             Numeracion resultado;
             
             resultado = new Numeracion(primerOperador.valorNumerico + segundoOperador.valorNumerico, ESistema.Decimal);
-            if (primerOperador.sistema == ESistema.Binario && segundoOperador.sistema == ESistema.Binario)
+            if (primerOperador == ESistema.Binario && segundoOperador == ESistema.Binario)
             {
                 resultado.valorNumerico = primerOperador.BinarioDecimal(primerOperador.ValorNumerico) 
                  + segundoOperador.BinarioDecimal(segundoOperador.ValorNumerico);
@@ -233,12 +231,12 @@ namespace Entidades
             Numeracion resultado;
 
             resultado = new Numeracion(primerOperador.valorNumerico - segundoOperador.valorNumerico, ESistema.Decimal);
-            if (primerOperador.sistema == ESistema.Binario && segundoOperador.sistema == ESistema.Binario)
+            /*if (primerOperador.sistema == ESistema.Binario && segundoOperador.sistema == ESistema.Binario)
             {
                 resultado.valorNumerico = primerOperador.BinarioDecimal(primerOperador.ValorNumerico)
                  - segundoOperador.BinarioDecimal(segundoOperador.ValorNumerico);
                 resultado.sistema = ESistema.Binario;
-            }
+            }*/
 
             return resultado; 
         }
@@ -248,12 +246,12 @@ namespace Entidades
             Numeracion resultado;
 
             resultado = new Numeracion(primerOperador.valorNumerico * segundoOperador.valorNumerico, ESistema.Decimal);
-            if (primerOperador.sistema == ESistema.Binario && segundoOperador.sistema == ESistema.Binario)
+            /*if (primerOperador.sistema == ESistema.Binario && segundoOperador.sistema == ESistema.Binario)
             {
                 resultado.valorNumerico = primerOperador.BinarioDecimal(primerOperador.ValorNumerico)
                  * segundoOperador.BinarioDecimal(segundoOperador.ValorNumerico);
                 resultado.sistema = ESistema.Binario;
-            }
+            }*/
 
             return resultado; 
         }
@@ -263,12 +261,6 @@ namespace Entidades
             Numeracion resultado;
 
             resultado = new Numeracion(primerOperador.valorNumerico / segundoOperador.valorNumerico, ESistema.Decimal);
-            if (primerOperador.sistema == ESistema.Binario && segundoOperador.sistema == ESistema.Binario)
-            {
-                resultado.valorNumerico = primerOperador.BinarioDecimal(primerOperador.ValorNumerico)
-                 / segundoOperador.BinarioDecimal(segundoOperador.ValorNumerico);
-                resultado.sistema = ESistema.Binario;
-            }
 
             return resultado; 
         }
