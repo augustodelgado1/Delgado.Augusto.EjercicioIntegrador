@@ -41,6 +41,8 @@ namespace Delgado.Augusto.EjercicioIntegrador
              && (primerOperando = new Numeracion(txtPrimerOperador.Text, sistema)) is not null 
              && (segundoOperando = new Numeracion(txtSegundoOperador.Text, sistema)) is not null)
             {
+                calculadora = new Operacion(primerOperando, segundoOperando);
+                resultado = calculadora.Operador((char)cmbOperacion.SelectedItem);
                 SetResultado();
             }
             else
@@ -92,11 +94,7 @@ namespace Delgado.Augusto.EjercicioIntegrador
             {
                 sistema = ESistema.Binario;
                 rdbDecimal.Checked = false;
-
-                if(resultado is not null)
-                {
-                    lblResultado.Text = $"Resultado : {resultado.ConvertirA(sistema)}";
-                }
+                SetResultado();
             }
         }
 
@@ -106,13 +104,7 @@ namespace Delgado.Augusto.EjercicioIntegrador
             {
                 sistema = ESistema.Decimal;
                 rdbBinario.Checked = false;
-
-
-                if (resultado is not null)
-                {
-                    lblResultado.Text = $"Resultado : {resultado.ConvertirA(sistema)}";
-                }
-
+                SetResultado();
             }
 
         }
@@ -198,15 +190,16 @@ namespace Delgado.Augusto.EjercicioIntegrador
 
         private void SetResultado()
         {
-            calculadora = new Operacion(primerOperando, segundoOperando);
-            resultado = calculadora.Operador((char)cmbOperacion.SelectedItem);
-            stringBuilder.AppendLine($"Resultado : {resultado.ValorNumerico}");
-            if (rdbBinario.Checked == true)
+            if (resultado is not null)
             {
-                stringBuilder.Clear();
-                stringBuilder.AppendLine($"Resultado : {resultado.ConvertirA(sistema)}");
+                if (resultado != sistema)
+                {
+                    stringBuilder.Clear();
+                    stringBuilder.AppendLine($"Resultado : {resultado.ConvertirA(sistema)}");
+                }
+
+                this.lblResultado.Text = $"Resultado : {resultado.ValorNumerico}";
             }
-            this.lblResultado.Text = stringBuilder.ToString();
         }
 
         #endregion

@@ -17,8 +17,8 @@
   "libraries": {
     "Entidades/1.0.0": {
       "type": "project",
-      "path": "../Entidades/Entidades.csproj",
-      "msbuildProject": "../Entidades/Entidades.csproj"
+      "path": "../Entidades_/Entidades.csproj",
+      "msbuildProject": "../Entidades_/Entidades.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -53,8 +53,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\PC\\Desktop\\Delgado.Augusto.EjercicioIntegrador\\Entidades\\Entidades.csproj": {
-              "projectPath": "C:\\Users\\PC\\Desktop\\Delgado.Augusto.EjercicioIntegrador\\Entidades\\Entidades.csproj"
+            "C:\\Users\\PC\\Desktop\\Delgado.Augusto.EjercicioIntegrador\\Entidades_\\Entidades.csproj": {
+              "projectPath": "C:\\Users\\PC\\Desktop\\Delgado.Augusto.EjercicioIntegrador\\Entidades_\\Entidades.csproj"
             }
           }
         }

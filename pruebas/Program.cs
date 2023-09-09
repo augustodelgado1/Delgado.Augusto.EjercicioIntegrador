@@ -6,15 +6,17 @@ namespace pruebas
     {
         static void Main(string[] args)
         {
-            string number;
-            double unNumero;
-            Numeracion unBinario = new Numeracion("100010", ESistema.Binario);
+            Numeracion unNumero = new Numeracion(10, ESistema.Decimal);
+            Numeracion otroNumero = new Numeracion(10, ESistema.Decimal);
 
-            Console.WriteLine(unBinario == ESistema.Decimal);
-            Console.WriteLine(unBinario == ESistema.Binario);
-            Console.WriteLine(new Numeracion(2, ESistema.Binario) == ESistema.Binario);
-            
+            unNumero += otroNumero;
+            new string(unNumero.ValorNumerico);
+            unNumero.ConvertirA(ESistema.Decimal);
+            otroNumero.ConvertirA(ESistema.Decimal);
 
+            unNumero += otroNumero;
+
+            unNumero = new Numeracion(1001, ESistema.Decimal) + new Numeracion(1001, ESistema.Decimal);
         }
 
         private static string DecimalBinario(int valor)
