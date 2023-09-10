@@ -17,54 +17,46 @@ namespace Delgado.Augusto.EjercicioIntegrador
         Numeracion resultado;
         Numeracion primerOperando;
         Numeracion segundoOperando;
-        StringBuilder stringBuilder = new StringBuilder();
-        
         public FrmCalculadora()
         {
             InitializeComponent();
-            CargarCmbItems(this.cmbOperacion.Items, listaDeOperadores);
-            rdbDecimal.Checked = true;
-            this.cmbOperacion.SelectedItem = '+';
+            unErrorProvider.Icon = SystemIcons.Error;
         }
+
         private void FrmCalculadora_Load(object sender, EventArgs e)
         {
-
+            if (CargarCmbItems(this.cmbOperacion.Items, listaDeOperadores))
+            {
+                this.cmbOperacion.SelectedItem = '+';
+            }
+            rdbDecimal.Checked = true;
+            this.lblResultado.Visible = false;
         }
 
         private void btnOperar_Click(object sender, EventArgs e)
         {
-            bool respuesta;
-            respuesta = DetectarTextBoxVacio(this.Controls);
 
-            if (cmbOperacion.SelectedItem is not null 
-             && cmbOperacion.SelectedItem is char && respuesta == true 
-             && (primerOperando = new Numeracion(txtPrimerOperador.Text, sistema)) is not null 
+            if (cmbOperacion.SelectedItem is not null && cmbOperacion.SelectedItem is char
+             && string.IsNullOrEmpty(unErrorProvider.GetError(txtPrimerOperador)) == true
+             && string.IsNullOrEmpty(unErrorProvider.GetError(txtSegundoOperador)) == true
+             && (primerOperando = new Numeracion(txtPrimerOperador.Text, sistema)) is not null
              && (segundoOperando = new Numeracion(txtSegundoOperador.Text, sistema)) is not null)
             {
                 calculadora = new Operacion(primerOperando, segundoOperando);
                 resultado = calculadora.Operador((char)cmbOperacion.SelectedItem);
                 SetResultado();
             }
-            else
-            {
-                if (respuesta == false)
-                {
-                    stringBuilder.Clear();
-                    stringBuilder.AppendLine($"Debe ingresar un numero");
-                }
-            }
         }
-
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarListaDeTextBox(this.Controls);
+            unErrorProvider.Clear();
             this.primerOperando = null;
             this.segundoOperando = null;
-
             if (resultado is not null)
             {
                 resultado = null;
-                this.lblResultado.Text = string.Empty;
+                this.lblResultado.Visible = false;
             }
         }
 
@@ -75,17 +67,25 @@ namespace Delgado.Augusto.EjercicioIntegrador
 
         private void FrmCalculadora_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = MostrarMensajeAntesDeCerrarLaAplicacion("¿Desea cerrar la calculadora?", "Salida");
+            e.Cancel = ConfirmarSalida("¿Desea cerrar la calculadora?", "Salida");
         }
 
         private void txtPrimerOperador_TextChanged(object sender, EventArgs e)
         {
-          
+            unErrorProvider.SetError(this.txtPrimerOperador, "Por favor, ingrese un número válido.");
+            if (double.TryParse(this.txtPrimerOperador.Text, out double primerNumero))
+            {
+                unErrorProvider.Clear();
+            }
         }
 
         private void txtSegundoOperador_TextChanged(object sender, EventArgs e)
         {
-            
+            unErrorProvider.SetError(this.txtSegundoOperador, "Por favor, ingrese un número válido.");
+            if (double.TryParse(this.txtSegundoOperador.Text, out double primerNumero))
+            {
+                unErrorProvider.Clear();
+            }
         }
 
         private void rdbBinario_CheckedChanged(object sender, EventArgs e)
@@ -111,21 +111,9 @@ namespace Delgado.Augusto.EjercicioIntegrador
 
 
         #region Metodos
-        private void LimpiarPantalla()
-        {
-            LimpiarListaDeTextBox(this.Controls);
-            this.primerOperando = null;
-            this.segundoOperando = null;
-
-            if (resultado is not null)
-            {
-                resultado = null;
-                this.lblResultado.Text = string.Empty;
-            }
-        }
-
         private void LimpiarListaDeTextBox(Control.ControlCollection listaDeControles)
         {
+
             if (listaDeControles is not null)
             {
                 foreach (Control unControl in listaDeControles)
@@ -136,28 +124,6 @@ namespace Delgado.Augusto.EjercicioIntegrador
                     }
                 }
             }
-        }
-
-        private bool DetectarTextBoxVacio(Control.ControlCollection listaDeControles)
-        {
-            bool resultado;
-            resultado = false;
-
-            if (listaDeControles is not null && listaDeControles.Count > 0)
-            {
-                resultado = true;
-                foreach (Control unControl in listaDeControles)
-                {
-                    if (unControl is not null && unControl is TextBox
-                     && string.IsNullOrWhiteSpace(((TextBox)unControl).Text) == true)
-                    {
-                        resultado = false;
-                        break;
-                    }
-                }
-            }
-
-            return resultado;
         }
 
         private bool CargarCmbItems(ComboBox.ObjectCollection items, char[] listaDeOperadores)
@@ -176,7 +142,7 @@ namespace Delgado.Augusto.EjercicioIntegrador
 
             return estado;
         }
-        private bool MostrarMensajeAntesDeCerrarLaAplicacion(string mensaje, string titulo)
+        private bool ConfirmarSalida(string mensaje, string titulo)
         {
             bool resultado = false;
             if (MessageBox.Show(mensaje, titulo, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
@@ -187,17 +153,15 @@ namespace Delgado.Augusto.EjercicioIntegrador
             return resultado;
         }
 
-
         private void SetResultado()
         {
             if (resultado is not null)
             {
                 if (resultado != sistema)
                 {
-                    stringBuilder.Clear();
-                    stringBuilder.AppendLine($"Resultado : {resultado.ConvertirA(sistema)}");
+                    resultado.ConvertirA(sistema);
                 }
-
+                this.lblResultado.Visible = true;
                 this.lblResultado.Text = $"Resultado : {resultado.ValorNumerico}";
             }
         }

@@ -6,8 +6,8 @@ namespace pruebas
     {
         static void Main(string[] args)
         {
-            Numeracion unNumero = new Numeracion(10, ESistema.Decimal);
-            Numeracion otroNumero = new Numeracion(10, ESistema.Decimal);
+            Numeracion unNumero = new Numeracion("hola pedro", ESistema.Decimal);
+            Numeracion otroNumero = new Numeracion("hola roman", ESistema.Decimal);
 
             unNumero += otroNumero;
             new string(unNumero.ValorNumerico);

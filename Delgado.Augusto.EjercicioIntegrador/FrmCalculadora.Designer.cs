@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             btnOperar = new Button();
             btnLimpiar = new Button();
             btnCerrar = new Button();
@@ -41,13 +42,15 @@
             rdbDecimal = new RadioButton();
             txtSegundoOperador = new TextBox();
             txtPrimerOperador = new TextBox();
+            unErrorProvider = new ErrorProvider(components);
             grpSistema.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)unErrorProvider).BeginInit();
             SuspendLayout();
             // 
             // btnOperar
             // 
             btnOperar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnOperar.Location = new Point(12, 314);
+            btnOperar.Location = new Point(12, 316);
             btnOperar.Name = "btnOperar";
             btnOperar.Size = new Size(172, 40);
             btnOperar.TabIndex = 0;
@@ -58,9 +61,9 @@
             // btnLimpiar
             // 
             btnLimpiar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            btnLimpiar.Location = new Point(312, 314);
+            btnLimpiar.Location = new Point(298, 316);
             btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(184, 40);
+            btnLimpiar.Size = new Size(199, 40);
             btnLimpiar.TabIndex = 1;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = true;
@@ -69,9 +72,9 @@
             // btnCerrar
             // 
             btnCerrar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            btnCerrar.Location = new Point(619, 314);
+            btnCerrar.Location = new Point(599, 316);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(177, 40);
+            btnCerrar.Size = new Size(192, 40);
             btnCerrar.TabIndex = 2;
             btnCerrar.Text = "Cerrar";
             btnCerrar.UseVisualStyleBackColor = true;
@@ -82,16 +85,16 @@
             cmbOperacion.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             cmbOperacion.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbOperacion.FormattingEnabled = true;
-            cmbOperacion.Location = new Point(312, 268);
+            cmbOperacion.Location = new Point(298, 270);
             cmbOperacion.Name = "cmbOperacion";
-            cmbOperacion.Size = new Size(184, 23);
+            cmbOperacion.Size = new Size(199, 23);
             cmbOperacion.TabIndex = 3;
             // 
             // lblResultado
             // 
             lblResultado.AutoSize = true;
             lblResultado.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            lblResultado.Location = new Point(12, 9);
+            lblResultado.Location = new Point(23, 9);
             lblResultado.Name = "lblResultado";
             lblResultado.Size = new Size(134, 37);
             lblResultado.TabIndex = 4;
@@ -102,7 +105,7 @@
             lblPrimerOperador.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lblPrimerOperador.AutoSize = true;
             lblPrimerOperador.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            lblPrimerOperador.Location = new Point(9, 220);
+            lblPrimerOperador.Location = new Point(12, 222);
             lblPrimerOperador.Name = "lblPrimerOperador";
             lblPrimerOperador.Size = new Size(154, 25);
             lblPrimerOperador.TabIndex = 5;
@@ -113,7 +116,7 @@
             lblOperacion.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lblOperacion.AutoSize = true;
             lblOperacion.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            lblOperacion.Location = new Point(353, 220);
+            lblOperacion.Location = new Point(339, 222);
             lblOperacion.Name = "lblOperacion";
             lblOperacion.Size = new Size(100, 25);
             lblOperacion.TabIndex = 6;
@@ -124,7 +127,7 @@
             lblSegundoOperador.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             lblSegundoOperador.AutoSize = true;
             lblSegundoOperador.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            lblSegundoOperador.Location = new Point(623, 220);
+            lblSegundoOperador.Location = new Point(609, 222);
             lblSegundoOperador.Name = "lblSegundoOperador";
             lblSegundoOperador.Size = new Size(173, 25);
             lblSegundoOperador.TabIndex = 7;
@@ -134,9 +137,9 @@
             // 
             grpSistema.Controls.Add(rdbBinario);
             grpSistema.Controls.Add(rdbDecimal);
-            grpSistema.Location = new Point(272, 70);
+            grpSistema.Location = new Point(250, 75);
             grpSistema.Name = "grpSistema";
-            grpSistema.Size = new Size(263, 103);
+            grpSistema.Size = new Size(270, 100);
             grpSistema.TabIndex = 8;
             grpSistema.TabStop = false;
             grpSistema.Text = "Representar Resultado en";
@@ -145,7 +148,7 @@
             // 
             rdbBinario.AutoSize = true;
             rdbBinario.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            rdbBinario.Location = new Point(153, 38);
+            rdbBinario.Location = new Point(156, 40);
             rdbBinario.Name = "rdbBinario";
             rdbBinario.Size = new Size(76, 22);
             rdbBinario.TabIndex = 1;
@@ -158,7 +161,7 @@
             // 
             rdbDecimal.AutoSize = true;
             rdbDecimal.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            rdbDecimal.Location = new Point(27, 38);
+            rdbDecimal.Location = new Point(30, 40);
             rdbDecimal.Name = "rdbDecimal";
             rdbDecimal.Size = new Size(84, 22);
             rdbDecimal.TabIndex = 0;
@@ -170,27 +173,31 @@
             // txtSegundoOperador
             // 
             txtSegundoOperador.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txtSegundoOperador.Location = new Point(619, 268);
+            txtSegundoOperador.Location = new Point(599, 270);
             txtSegundoOperador.Name = "txtSegundoOperador";
-            txtSegundoOperador.Size = new Size(177, 23);
+            txtSegundoOperador.Size = new Size(192, 23);
             txtSegundoOperador.TabIndex = 9;
             txtSegundoOperador.TextChanged += txtSegundoOperador_TextChanged;
             // 
             // txtPrimerOperador
             // 
             txtPrimerOperador.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txtPrimerOperador.Location = new Point(12, 268);
+            txtPrimerOperador.Location = new Point(12, 270);
             txtPrimerOperador.Name = "txtPrimerOperador";
             txtPrimerOperador.Size = new Size(172, 23);
             txtPrimerOperador.TabIndex = 10;
             txtPrimerOperador.TextChanged += txtPrimerOperador_TextChanged;
+            // 
+            // unErrorProvider
+            // 
+            unErrorProvider.ContainerControl = this;
             // 
             // FrmCalculadora
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(808, 366);
+            ClientSize = new Size(823, 368);
             Controls.Add(txtPrimerOperador);
             Controls.Add(txtSegundoOperador);
             Controls.Add(grpSistema);
@@ -212,6 +219,7 @@
             Load += FrmCalculadora_Load;
             grpSistema.ResumeLayout(false);
             grpSistema.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)unErrorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -231,5 +239,6 @@
         private RadioButton rdbDecimal;
         private TextBox txtSegundoOperador;
         private TextBox txtPrimerOperador;
+        private ErrorProvider unErrorProvider;
     }
 }
