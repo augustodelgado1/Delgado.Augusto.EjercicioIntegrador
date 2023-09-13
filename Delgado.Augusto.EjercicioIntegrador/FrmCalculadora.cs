@@ -145,6 +145,7 @@ namespace Delgado.Augusto.EjercicioIntegrador
         private bool ConfirmarSalida(string mensaje, string titulo)
         {
             bool resultado = false;
+
             if (MessageBox.Show(mensaje, titulo, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 resultado = true;
@@ -157,7 +158,7 @@ namespace Delgado.Augusto.EjercicioIntegrador
         {
             if (resultado is not null)
             {
-                if (resultado != sistema)
+                if (sistema != resultado)
                 {
                     resultado.ConvertirA(sistema);
                 }

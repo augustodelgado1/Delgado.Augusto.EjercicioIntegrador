@@ -155,7 +155,7 @@ namespace Entidades
             int resultadoDeLaMultiplicacion;
             char[] arr = null;
 
-            if (this != ESistema.Binario)
+            if (ESistema.Binario != this)
             {
                 do
                 {
@@ -178,8 +178,8 @@ namespace Entidades
 
             return new string(arr);
         }
-
-        public static bool operator == (Numeracion unNumero,ESistema unSitemaNumerico)
+        
+        public static bool operator == (ESistema unSitemaNumerico, Numeracion unNumero)
         {
             bool respuesta;
             respuesta = unSitemaNumerico == ESistema.Decimal && unNumero.sistema == ESistema.Decimal;
@@ -191,9 +191,9 @@ namespace Entidades
             return respuesta;
         } 
         
-        public static bool operator != (Numeracion primerOperador,ESistema unSitemaNumerico)
+        public static bool operator != (ESistema unSitemaNumerico, Numeracion primerOperador)
         {
-            return !(primerOperador == unSitemaNumerico);
+            return !(unSitemaNumerico == primerOperador);
         }
 
         public static Numeracion operator +(Numeracion primerOperador, Numeracion segundoOperador)
@@ -281,7 +281,7 @@ namespace Entidades
 
                 resultado = this.valorNumerico.ToString();
 
-                if (this != this.sistema)
+                if (this.sistema != this )
                 {
                     resultado = ConvertirA(this.sistema);
                 }
