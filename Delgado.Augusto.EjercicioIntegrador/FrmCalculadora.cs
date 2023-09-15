@@ -25,22 +25,18 @@ namespace Delgado.Augusto.EjercicioIntegrador
 
         private void FrmCalculadora_Load(object sender, EventArgs e)
         {
-            if (CargarCmbItems(this.cmbOperacion.Items, listaDeOperadores))
-            {
-                this.cmbOperacion.SelectedItem = '+';
-            }
+            CargarCmbItems(this.cmbOperacion.Items, listaDeOperadores);
             rdbDecimal.Checked = true;
             this.lblResultado.Visible = false;
         }
 
         private void btnOperar_Click(object sender, EventArgs e)
         {
-
-            if (cmbOperacion.SelectedItem is not null && cmbOperacion.SelectedItem is char
+            if (cmbOperacion.SelectedItem is char
              && string.IsNullOrEmpty(unErrorProvider.GetError(txtPrimerOperador)) == true
              && string.IsNullOrEmpty(unErrorProvider.GetError(txtSegundoOperador)) == true
-             && (primerOperando = new Numeracion(txtPrimerOperador.Text, sistema)) is not null
-             && (segundoOperando = new Numeracion(txtSegundoOperador.Text, sistema)) is not null)
+             && (primerOperando = new Numeracion(txtPrimerOperador.Text, ESistema.Decimal)) is not null
+             && (segundoOperando = new Numeracion(txtSegundoOperador.Text, ESistema.Decimal)) is not null)
             {
                 calculadora = new Operacion(primerOperando, segundoOperando);
                 resultado = calculadora.Operador((char)cmbOperacion.SelectedItem);
@@ -62,7 +58,7 @@ namespace Delgado.Augusto.EjercicioIntegrador
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
 
         private void FrmCalculadora_FormClosing(object sender, FormClosingEventArgs e)
@@ -78,7 +74,6 @@ namespace Delgado.Augusto.EjercicioIntegrador
                 unErrorProvider.Clear();
             }
         }
-
         private void txtSegundoOperador_TextChanged(object sender, EventArgs e)
         {
             unErrorProvider.SetError(this.txtSegundoOperador, "Por favor, ingrese un número válido.");
@@ -93,7 +88,6 @@ namespace Delgado.Augusto.EjercicioIntegrador
             if (rdbBinario.Checked == true)
             {
                 sistema = ESistema.Binario;
-                rdbDecimal.Checked = false;
                 SetResultado();
             }
         }
@@ -103,7 +97,6 @@ namespace Delgado.Augusto.EjercicioIntegrador
             if (rdbDecimal.Checked == true)
             {
                 sistema = ESistema.Decimal;
-                rdbBinario.Checked = false;
                 SetResultado();
             }
 
@@ -165,6 +158,11 @@ namespace Delgado.Augusto.EjercicioIntegrador
                 this.lblResultado.Visible = true;
                 this.lblResultado.Text = $"Resultado : {resultado.ValorNumerico}";
             }
+        }
+
+        private void cmbOperacion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
         #endregion

@@ -23,8 +23,10 @@ namespace Entidades
         private void InicializarValores(string valorNumerico, ESistema sistema)
         {
             double unNumero;
+            this.valorNumerico = double.MinValue;
 
-            if (double.TryParse(valorNumerico, out unNumero) == true )
+            if ((sistema == ESistema.Binario && (unNumero = BinarioDecimal(valorNumerico)) != -1) 
+             || double.TryParse(valorNumerico, out unNumero) == true)
             {
                 this.valorNumerico = unNumero;
                 this.sistema = sistema;
@@ -59,7 +61,7 @@ namespace Entidades
 
             if (sistema == ESistema.Decimal)
             {
-                result = BinarioDecimal(this.valorNumerico.ToString()).ToString();
+                result = this.valorNumerico.ToString();
             }
             else
             {
@@ -68,6 +70,7 @@ namespace Entidades
                     result = DecimalBinario((int)this.valorNumerico);
                 }
             }
+            this.sistema = sistema;
 
             return result;
 
@@ -123,7 +126,7 @@ namespace Entidades
                         contador++;
                     }
                 }
-                InicializarValores(resultDecimal.ToString(), ESistema.Decimal);
+
             }
             return resultDecimal;
         }
@@ -169,7 +172,6 @@ namespace Entidades
                         result.Append(valor);
                         arr = result.ToString().ToCharArray();
                         Array.Reverse(arr);
-                        InicializarValores(new string(arr), ESistema.Binario);
                         break;
                     }
 
@@ -199,68 +201,56 @@ namespace Entidades
         public static Numeracion operator +(Numeracion primerOperador, Numeracion segundoOperador)
         {
             ESistema sistema;
-            Numeracion auxiliar = new Numeracion(primerOperador.valorNumerico, ESistema.Decimal);
-            Numeracion otroAuxiliar = new Numeracion(segundoOperador.valorNumerico, ESistema.Decimal);
             sistema = ESistema.Decimal;
             
-            if (primerOperador.sistema == ESistema.Binario && segundoOperador.sistema == ESistema.Binario)
+            if (primerOperador.sistema == ESistema.Binario 
+            && segundoOperador.sistema == ESistema.Binario)
             {
-                auxiliar.ConvertirA(ESistema.Decimal);
-                otroAuxiliar.ConvertirA(ESistema.Decimal);
                 sistema = ESistema.Binario;
             }
 
-            return new Numeracion(auxiliar.valorNumerico + otroAuxiliar.valorNumerico, sistema);
+            return new Numeracion(primerOperador.valorNumerico + segundoOperador.valorNumerico, sistema);
         }
         public static Numeracion operator -(Numeracion primerOperador, Numeracion segundoOperador)
         {
             ESistema sistema;
-            Numeracion auxiliar = new Numeracion(primerOperador.valorNumerico, ESistema.Decimal);
-            Numeracion otroAuxiliar = new Numeracion(segundoOperador.valorNumerico, ESistema.Decimal);
             sistema = ESistema.Decimal;
 
-            if (primerOperador.sistema == ESistema.Binario && segundoOperador.sistema == ESistema.Binario)
+            if (primerOperador.sistema == ESistema.Binario
+            && segundoOperador.sistema == ESistema.Binario)
             {
-                auxiliar.ConvertirA(ESistema.Decimal);
-                otroAuxiliar.ConvertirA(ESistema.Decimal);
                 sistema = ESistema.Binario;
             }
 
-            return new Numeracion(auxiliar.valorNumerico - otroAuxiliar.valorNumerico, sistema);
+            return new Numeracion(primerOperador.valorNumerico - segundoOperador.valorNumerico, sistema);
         }
 
         public static Numeracion operator *(Numeracion primerOperador, Numeracion segundoOperador)
         {
             ESistema sistema;
-            Numeracion auxiliar = new Numeracion(primerOperador.valorNumerico, ESistema.Decimal);
-            Numeracion otroAuxiliar = new Numeracion(segundoOperador.valorNumerico, ESistema.Decimal);
             sistema = ESistema.Decimal;
 
-            if (primerOperador.sistema == ESistema.Binario && segundoOperador.sistema == ESistema.Binario)
+            if (primerOperador.sistema == ESistema.Binario
+            && segundoOperador.sistema == ESistema.Binario)
             {
-                auxiliar.ConvertirA(ESistema.Decimal);
-                otroAuxiliar.ConvertirA(ESistema.Decimal);
                 sistema = ESistema.Binario;
             }
 
-            return new Numeracion(auxiliar.valorNumerico * otroAuxiliar.valorNumerico, sistema);
+            return new Numeracion(primerOperador.valorNumerico * segundoOperador.valorNumerico, sistema);
         }
 
         public static Numeracion operator /(Numeracion primerOperador, Numeracion segundoOperador)
         {
             ESistema sistema;
-            Numeracion auxiliar = new Numeracion(primerOperador.valorNumerico, ESistema.Decimal);
-            Numeracion otroAuxiliar = new Numeracion(segundoOperador.valorNumerico, ESistema.Decimal);
             sistema = ESistema.Decimal;
 
-            if (primerOperador.sistema == ESistema.Binario && segundoOperador.sistema == ESistema.Binario)
+            if (primerOperador.sistema == ESistema.Binario
+            && segundoOperador.sistema == ESistema.Binario)
             {
-                auxiliar.ConvertirA(ESistema.Decimal);
-                otroAuxiliar.ConvertirA(ESistema.Decimal);
                 sistema = ESistema.Binario;
             }
 
-            return new Numeracion(auxiliar.valorNumerico / otroAuxiliar.valorNumerico, sistema);
+            return new Numeracion(primerOperador.valorNumerico / segundoOperador.valorNumerico, sistema);
         }
         public static bool operator ==(Numeracion primerOperador, Numeracion segundoOperador)
         {
@@ -279,11 +269,12 @@ namespace Entidades
             get {
                 string resultado ;
 
-                resultado = this.valorNumerico.ToString();
+                resultado = double.MinValue.ToString();
 
-                if (this.sistema != this )
+                if (this.valorNumerico != double.MinValue)
                 {
                     resultado = ConvertirA(this.sistema);
+                   
                 }
 
                 return resultado;

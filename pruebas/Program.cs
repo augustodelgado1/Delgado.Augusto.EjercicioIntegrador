@@ -6,17 +6,23 @@ namespace pruebas
     {
         static void Main(string[] args)
         {
-            Numeracion unNumero = new Numeracion("hola pedro", ESistema.Decimal);
-            Numeracion otroNumero = new Numeracion("hola roman", ESistema.Decimal);
+          
+            Numeracion otroNumero = new Numeracion("100", ESistema.Decimal);
+            Numeracion tercerNumero = new Numeracion("14", ESistema.Decimal);
+            Numeracion cuartoNumero = new Numeracion("100", ESistema.Binario);
+            Console.WriteLine(cuartoNumero.ValorNumerico);
+            tercerNumero.ConvertirA(ESistema.Binario);
+            Console.WriteLine(tercerNumero.ValorNumerico);
+            Console.WriteLine((tercerNumero + cuartoNumero).ValorNumerico);
+            Console.ReadKey();
+            /*    unNumero += otroNumero;
+                new string(unNumero.ValorNumerico);
+                unNumero.ConvertirA(ESistema.Decimal);
+                otroNumero.ConvertirA(ESistema.Decimal);
 
-            unNumero += otroNumero;
-            new string(unNumero.ValorNumerico);
-            unNumero.ConvertirA(ESistema.Decimal);
-            otroNumero.ConvertirA(ESistema.Decimal);
+                unNumero += otroNumero;
 
-            unNumero += otroNumero;
-
-            unNumero = new Numeracion(1001, ESistema.Decimal) + new Numeracion(1001, ESistema.Decimal);
+                unNumero = new Numeracion(1001, ESistema.Decimal) + new Numeracion(1001, ESistema.Decimal);*/
         }
 
         private static string DecimalBinario(int valor)
