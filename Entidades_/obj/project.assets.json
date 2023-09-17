@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\Desktop\\Delgado.Augusto.EjercicioIntegrador\\Entidades_\\Entidades.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\Desktop\\reba\\Delgado.Augusto.EjercicioIntegrador\\Entidades_\\Entidades.csproj",
       "projectName": "Entidades",
-      "projectPath": "C:\\Users\\PC\\Desktop\\Delgado.Augusto.EjercicioIntegrador\\Entidades_\\Entidades.csproj",
+      "projectPath": "C:\\Users\\PC\\Desktop\\reba\\Delgado.Augusto.EjercicioIntegrador\\Entidades_\\Entidades.csproj",
       "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\Desktop\\Delgado.Augusto.EjercicioIntegrador\\Entidades_\\obj\\",
+      "outputPath": "C:\\Users\\PC\\Desktop\\reba\\Delgado.Augusto.EjercicioIntegrador\\Entidades_\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",

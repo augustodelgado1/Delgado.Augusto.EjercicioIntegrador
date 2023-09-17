@@ -86,10 +86,11 @@
             cmbOperacion.BackColor = SystemColors.Menu;
             cmbOperacion.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbOperacion.FlatStyle = FlatStyle.System;
+            cmbOperacion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             cmbOperacion.FormattingEnabled = true;
             cmbOperacion.Location = new Point(317, 243);
             cmbOperacion.Name = "cmbOperacion";
-            cmbOperacion.Size = new Size(179, 23);
+            cmbOperacion.Size = new Size(179, 29);
             cmbOperacion.TabIndex = 1;
             cmbOperacion.SelectedIndexChanged += cmbOperacion_SelectedIndexChanged;
             // 

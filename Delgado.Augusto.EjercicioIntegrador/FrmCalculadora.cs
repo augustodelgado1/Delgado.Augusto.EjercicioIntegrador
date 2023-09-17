@@ -6,6 +6,7 @@ using System.Runtime.ConstrainedExecution;
 using System.Windows.Forms;
 using System.Security.Cryptography;
 using System.Text;
+using System;
 
 namespace Delgado.Augusto.EjercicioIntegrador
 {
@@ -20,39 +21,40 @@ namespace Delgado.Augusto.EjercicioIntegrador
         public FrmCalculadora()
         {
             InitializeComponent();
-            unErrorProvider.Icon = SystemIcons.Error;
+            this.unErrorProvider.Icon = SystemIcons.Error;
         }
 
         private void FrmCalculadora_Load(object sender, EventArgs e)
         {
-            CargarCmbItems(this.cmbOperacion.Items, listaDeOperadores);
-            rdbDecimal.Checked = true;
+            this.CargarCmbItems(this.cmbOperacion.Items, listaDeOperadores);
+            this.rdbDecimal.Checked = true;
             this.lblResultado.Visible = false;
         }
 
         private void btnOperar_Click(object sender, EventArgs e)
         {
-            if (cmbOperacion.SelectedItem is char
-             && string.IsNullOrEmpty(unErrorProvider.GetError(txtPrimerOperador)) == true
-             && string.IsNullOrEmpty(unErrorProvider.GetError(txtSegundoOperador)) == true
+            if (ActivarErrorProvider(this.cmbOperacion, "Ingrese un operador valido", unControl => unControl is not null && string.IsNullOrWhiteSpace(unControl.Text) == false)
+             && ActivarErrorProvider(this.txtPrimerOperador, "Ingrese un numero valido", unControl => unControl is not null && double.TryParse(unControl.Text, out double primerNumero))
+             && ActivarErrorProvider(this.txtSegundoOperador, "Ingrese un numero valido", unControl => unControl is not null && double.TryParse(unControl.Text, out double primerNumero))
              && (primerOperando = new Numeracion(txtPrimerOperador.Text, ESistema.Decimal)) is not null
              && (segundoOperando = new Numeracion(txtSegundoOperador.Text, ESistema.Decimal)) is not null)
             {
-                calculadora = new Operacion(primerOperando, segundoOperando);
-                resultado = calculadora.Operador((char)cmbOperacion.SelectedItem);
-                SetResultado();
+                this.calculadora = new Operacion(primerOperando, segundoOperando);
+                this.resultado = calculadora.Operador((char)cmbOperacion.SelectedItem);
+                this.SetResultado();
             }
         }
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            LimpiarListaDeTextBox(this.Controls);
-            unErrorProvider.Clear();
-            this.primerOperando = null;
-            this.segundoOperando = null;
+            this.LimpiarListaDeTextBox(this.Controls);
+            this.unErrorProvider.Clear();
+
             if (resultado is not null)
             {
                 resultado = null;
                 this.lblResultado.Visible = false;
+                this.primerOperando = null;
+                this.segundoOperando = null;
             }
         }
 
@@ -68,26 +70,34 @@ namespace Delgado.Augusto.EjercicioIntegrador
 
         private void txtPrimerOperador_TextChanged(object sender, EventArgs e)
         {
-            unErrorProvider.SetError(this.txtPrimerOperador, "Por favor, ingrese un número válido.");
-            if (double.TryParse(this.txtPrimerOperador.Text, out double primerNumero))
-            {
-                unErrorProvider.Clear();
-            }
+            ActivarErrorProvider(this.txtPrimerOperador, "Ingrese un numero valido", unControl => unControl is not null && double.TryParse(unControl.Text, out double primerNumero));
         }
+
+        private bool ActivarErrorProvider(Control unControl, string mensaje, Predicate<Control> predicate)
+        {
+            bool estado;
+            estado = false;
+            this.unErrorProvider.SetError(unControl, mensaje);
+
+            if (predicate is not null && predicate.Invoke(unControl) == true)
+            {
+                this.unErrorProvider.Clear();
+                estado = true;
+            }
+
+            return estado;
+        }
+
         private void txtSegundoOperador_TextChanged(object sender, EventArgs e)
         {
-            unErrorProvider.SetError(this.txtSegundoOperador, "Por favor, ingrese un número válido.");
-            if (double.TryParse(this.txtSegundoOperador.Text, out double primerNumero))
-            {
-                unErrorProvider.Clear();
-            }
+            ActivarErrorProvider(this.txtSegundoOperador, "Ingrese un numero valido", unControl => unControl is not null && double.TryParse(unControl.Text, out double primerNumero));
         }
 
         private void rdbBinario_CheckedChanged(object sender, EventArgs e)
         {
             if (rdbBinario.Checked == true)
             {
-                sistema = ESistema.Binario;
+                this.sistema = ESistema.Binario;
                 SetResultado();
             }
         }
@@ -96,7 +106,7 @@ namespace Delgado.Augusto.EjercicioIntegrador
         {
             if (rdbDecimal.Checked == true)
             {
-                sistema = ESistema.Decimal;
+                this.sistema = ESistema.Decimal;
                 SetResultado();
             }
 
@@ -104,19 +114,23 @@ namespace Delgado.Augusto.EjercicioIntegrador
 
 
         #region Metodos
-        private void LimpiarListaDeTextBox(Control.ControlCollection listaDeControles)
+        private bool LimpiarListaDeTextBox(Control.ControlCollection listaDeControles)
         {
-
+            bool result = false;
             if (listaDeControles is not null)
             {
+                result = true;
                 foreach (Control unControl in listaDeControles)
                 {
-                    if (unControl is not null && unControl is TextBox)
+                    if (unControl is not null && unControl is TextBox
+                     && string.IsNullOrWhiteSpace(unControl.Text) == false)
                     {
                         ((TextBox)unControl).Clear();
                     }
                 }
             }
+
+            return result;
         }
 
         private bool CargarCmbItems(ComboBox.ObjectCollection items, char[] listaDeOperadores)
@@ -149,20 +163,20 @@ namespace Delgado.Augusto.EjercicioIntegrador
 
         private void SetResultado()
         {
-            if (resultado is not null)
+            if (this.resultado is not null)
             {
-                if (sistema != resultado)
+                if (this.sistema != this.resultado)
                 {
-                    resultado.ConvertirA(sistema);
+                    this.resultado.ConvertirA(sistema);
                 }
                 this.lblResultado.Visible = true;
-                this.lblResultado.Text = $"Resultado : {resultado.ValorNumerico}";
+                this.lblResultado.Text = $"Resultado : {this.resultado.ValorNumerico}";
             }
         }
 
         private void cmbOperacion_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            ActivarErrorProvider(this.cmbOperacion, "Ingrese un operador valido", unControl => string.IsNullOrWhiteSpace(unControl.Text) == false);
         }
 
         #endregion
