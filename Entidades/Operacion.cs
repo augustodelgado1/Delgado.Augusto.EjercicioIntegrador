@@ -11,12 +11,24 @@ namespace Entidades
         private Numeracion primerOperador;
         private Numeracion segundoOperador;
 
+        /// <summary>
+        /// es el contructor de la clase que inicializa los atributos
+        /// </summary>
+        /// <param name="primerOperador"></param>
+        /// <param name="segundoOperador"></param>
         public Operacion(Numeracion primerOperador, Numeracion segundoOperador)
         {
             this.primerOperador = primerOperador;
             this.segundoOperador = segundoOperador;
         }
 
+        /// <summary>
+        /// Realiza una operacion determinada entre dos operadores y develve el resultado en un sistema 
+        /// en especifico
+        /// </summary>
+        /// <param name="operador">la opercion que desea realizar (+,-,*,/)</param>
+        /// <returns>el resultado de la operacion ,en caso de no recibir un operador valido realizara 
+        /// una suma</returns>
         public Numeracion Operador(char operador)
         {
             Numeracion resultado = null;
@@ -44,10 +56,12 @@ namespace Entidades
             return resultado;
         }
 
-        
 
-        public Numeracion PrimerOperador { get => primerOperador; set => primerOperador = value; }
-        public Numeracion SegundoOperador { get => segundoOperador; set => segundoOperador = value; }
+
+        public Numeracion PrimerOperador { get { return primerOperador; }  set { primerOperador = value; }  }
+        
+        
+        public Numeracion SegundoOperador { get { return segundoOperador; } set { segundoOperador = value; } }
 
        
     }

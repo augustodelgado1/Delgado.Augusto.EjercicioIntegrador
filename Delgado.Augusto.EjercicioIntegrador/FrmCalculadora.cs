@@ -12,12 +12,13 @@ namespace Delgado.Augusto.EjercicioIntegrador
 {
     public partial class FrmCalculadora : Form
     {
-        char[] listaDeOperadores = { '+', '-', '*', '/' };
-        Operacion calculadora;
-        ESistema sistema;
-        Numeracion resultado;
-        Numeracion primerOperando;
-        Numeracion segundoOperando;
+        private char[] listaDeOperadores = { '+', '-', '*', '/' };
+        private Operacion calculadora;
+        private ESistema sistema;
+        private Numeracion resultado;
+        private Numeracion primerOperando;
+        private Numeracion segundoOperando;
+        private StringBuilder mensaje;
         public FrmCalculadora()
         {
             InitializeComponent();
@@ -26,14 +27,15 @@ namespace Delgado.Augusto.EjercicioIntegrador
 
         private void FrmCalculadora_Load(object sender, EventArgs e)
         {
+            mensaje = new StringBuilder();
             this.CargarCmbItems(this.cmbOperacion.Items, listaDeOperadores);
             this.rdbDecimal.Checked = true;
             this.lblResultado.Visible = false;
         }
 
         private void btnOperar_Click(object sender, EventArgs e)
-        {
-            if (ActivarErrorProvider(this.cmbOperacion, "Ingrese un operador valido", unControl => unControl is not null && string.IsNullOrWhiteSpace(unControl.Text) == false)
+        {   
+            if (ActivarErrorProvider(this.cmbOperacion, "Elija un operador", unControl => unControl is not null && string.IsNullOrWhiteSpace(unControl.Text) == false)
              && ActivarErrorProvider(this.txtPrimerOperador, "Ingrese un numero valido", unControl => unControl is not null && double.TryParse(unControl.Text, out double primerNumero))
              && ActivarErrorProvider(this.txtSegundoOperador, "Ingrese un numero valido", unControl => unControl is not null && double.TryParse(unControl.Text, out double primerNumero))
              && (primerOperando = new Numeracion(txtPrimerOperador.Text, ESistema.Decimal)) is not null
@@ -65,29 +67,13 @@ namespace Delgado.Augusto.EjercicioIntegrador
 
         private void FrmCalculadora_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = ConfirmarSalida("¿Desea cerrar la calculadora?", "Salida");
+            e.Cancel = ConfirmarSalida("¿Desea cerrar la calculadora?", "Salida"); 
         }
 
         private void txtPrimerOperador_TextChanged(object sender, EventArgs e)
         {
             ActivarErrorProvider(this.txtPrimerOperador, "Ingrese un numero valido", unControl => unControl is not null && double.TryParse(unControl.Text, out double primerNumero));
         }
-
-        private bool ActivarErrorProvider(Control unControl, string mensaje, Predicate<Control> predicate)
-        {
-            bool estado;
-            estado = false;
-            this.unErrorProvider.SetError(unControl, mensaje);
-
-            if (predicate is not null && predicate.Invoke(unControl) == true)
-            {
-                this.unErrorProvider.Clear();
-                estado = true;
-            }
-
-            return estado;
-        }
-
         private void txtSegundoOperador_TextChanged(object sender, EventArgs e)
         {
             ActivarErrorProvider(this.txtSegundoOperador, "Ingrese un numero valido", unControl => unControl is not null && double.TryParse(unControl.Text, out double primerNumero));
@@ -114,6 +100,36 @@ namespace Delgado.Augusto.EjercicioIntegrador
 
 
         #region Metodos
+
+        /// <summary>
+        /// Muestra un error provider informando que condiciones debe cumplir el Control pasado por parametro
+        /// </summary>
+        /// <param name="unControl">el control</param>
+        /// <param name="mensaje">Mensaje informando que condiciones debe cumplir el control</param>
+        /// <param name="predicate">el metodo que va a derminar si se cumplieron las condiciones , que debe
+        /// retornar (True) en caso que se cumpla o (false) de caso contrario</param>
+        /// <returns>(false) en caso de que el control no se cumpla con la condiciones de el metodo pasado por parametro
+        /// de lo contrario devueve (true)</returns>
+        private bool ActivarErrorProvider(Control unControl, string mensaje, Predicate<Control> predicate)
+        {
+            bool estado;
+            estado = false;
+            this.unErrorProvider.SetError(unControl, mensaje);
+
+            if (predicate is not null && predicate.Invoke(unControl) == true)
+            {
+                this.unErrorProvider.Clear();
+                estado = true;
+            }
+
+            return estado;
+        }
+
+        /// <summary>
+        /// Recorre la lista de controles y limpia los text box de la lista de controles
+        /// </summary>
+        /// <param name="listaDeControles">una lista de controles</param>
+        /// <returns>(false) si los parametros no son correcto , (true) de caso contrario </returns>
         private bool LimpiarListaDeTextBox(Control.ControlCollection listaDeControles)
         {
             bool result = false;
@@ -133,6 +149,12 @@ namespace Delgado.Augusto.EjercicioIntegrador
             return result;
         }
 
+        /// <summary>
+        /// Guarda los elementos de un array de char[] ,en una lista de controles de ComboBox
+        /// </summary>
+        /// <param name="items">Los elementos que se van a guardar</param>
+        /// <param name="listaDeOperadores">Donde se va almaser los elementos del array de char[]</param>
+        /// <returns>(True) si pudo guardar los elementos , de casoi contrario retorna (false)</returns>
         private bool CargarCmbItems(ComboBox.ObjectCollection items, char[] listaDeOperadores)
         {
             bool estado;
@@ -140,7 +162,7 @@ namespace Delgado.Augusto.EjercicioIntegrador
             if (items is not null)
             {
                 estado = true;
-                items.Clear();
+
                 foreach (char unOperador in listaDeOperadores)
                 {
                     items.Add(unOperador);
@@ -149,29 +171,46 @@ namespace Delgado.Augusto.EjercicioIntegrador
 
             return estado;
         }
+
+        /// <summary>
+        /// le Muestra al usuario un mesaje donde le da la opcion de que si quiere cerrar un form en especifico
+        /// </summary>
+        /// <param name="mensaje"></param>
+        /// <param name="titulo"></param>
+        /// <returns></returns>
         private bool ConfirmarSalida(string mensaje, string titulo)
         {
             bool resultado = false;
 
-            if (MessageBox.Show(mensaje, titulo, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (string.IsNullOrWhiteSpace(mensaje) == false && string.IsNullOrWhiteSpace(titulo) == false
+             && MessageBox.Show(mensaje, titulo, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 resultado = true;
             }
 
             return resultado;
-        }
-
+        } 
+        
+        /// <summary>
+        /// muestra el resultado de la operación, 
+        /// convertido de acuerdo con el sistema numérico seleccionado
+        /// </summary>
         private void SetResultado()
         {
+            mensaje.Clear();
+            mensaje.AppendLine("No se pudo realizar la operacion");
             if (this.resultado is not null)
             {
                 if (this.sistema != this.resultado)
                 {
                     this.resultado.ConvertirA(sistema);
                 }
-                this.lblResultado.Visible = true;
-                this.lblResultado.Text = $"Resultado : {this.resultado.ValorNumerico}";
+                
+                mensaje.Clear();
+                mensaje.AppendLine($"Resultado : {this.resultado.ValorNumerico}");
             }
+            this.lblResultado.Visible = true;
+            this.lblResultado.Text = mensaje.ToString();
         }
 
         private void cmbOperacion_SelectedIndexChanged(object sender, EventArgs e)

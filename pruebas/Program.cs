@@ -7,11 +7,11 @@ namespace pruebas
         static void Main(string[] args)
         {
           
-            Numeracion otroNumero = new Numeracion("100", ESistema.Decimal);
-            Numeracion tercerNumero = new Numeracion("14", ESistema.Decimal);
-            Numeracion cuartoNumero = new Numeracion("100", ESistema.Binario);
+            Numeracion otroNumero = new Numeracion("-14", ESistema.Binario);
+            Numeracion tercerNumero = new Numeracion("100", ESistema.Decimal);
+            Numeracion cuartoNumero = new Numeracion("100", ESistema.Decimal);
             Console.WriteLine(cuartoNumero.ValorNumerico);
-            tercerNumero.ConvertirA(ESistema.Binario);
+            tercerNumero.ConvertirA(ESistema.Decimal);
             Console.WriteLine(tercerNumero.ValorNumerico);
             Console.WriteLine((tercerNumero + cuartoNumero).ValorNumerico);
             Console.ReadKey();
