@@ -50,11 +50,11 @@ namespace Delgado.Augusto.EjercicioIntegrador
         {
             this.LimpiarListaDeTextBox(this.Controls);
             this.unErrorProvider.Clear();
+            this.lblResultado.Visible = false;
 
             if (resultado is not null)
             {
                 resultado = null;
-                this.lblResultado.Visible = false;
                 this.primerOperando = null;
                 this.segundoOperando = null;
             }
