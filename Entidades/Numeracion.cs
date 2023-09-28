@@ -10,6 +10,7 @@ namespace Entidades
         Decimal = 0,
         Binario
     }
+
     public class Numeracion
     {
 
@@ -27,7 +28,7 @@ namespace Entidades
             double unNumero;
             this.valorNumerico = double.MinValue;
 
-            if ((sistema == ESistema.Binario && (unNumero = BinarioDecimal(valorNumerico)) != -1) 
+            if ((sistema == ESistema.Binario && (unNumero = BinarioDecimal(valorNumerico)) != -1)
              || double.TryParse(valorNumerico, out unNumero) == true)
             {
                 this.valorNumerico = unNumero;
@@ -50,7 +51,7 @@ namespace Entidades
         /// </summary>
         /// <param name="valor"></param>
         /// <param name="sistema"></param>
-        public Numeracion(string valor, ESistema sistema) 
+        public Numeracion(string valor, ESistema sistema)
         {
             InicializarValores(valor, sistema);
         }
@@ -81,7 +82,7 @@ namespace Entidades
 
             return result;
 
-        } 
+        }
 
         /// <summary>
         /// Valida que la cadena de caracteres sea un numero binario
@@ -108,13 +109,13 @@ namespace Entidades
 
             return result;
         }
-        
+
         /// Convierte un número binario a decimal.
         /// 
         /// <param name="valor">un numero binario</param>
         /// 
         /// <returns> el numero binario pasado a decimal,Caso contrario retornará "-1" </returns>
-        private double BinarioDecimal(string valor)
+        private static double BinarioDecimal(string valor)
         {
             double resultDecimal = -1;
             int contador;
@@ -122,10 +123,10 @@ namespace Entidades
             contador = 0;
 
             if (EsBinario(valor) == true
-             && double.TryParse(valor,out double valorNumerico) == true && valorNumerico >= 0)
+             && double.TryParse(valor, out double valorNumerico) == true && valorNumerico >= 0)
             {
                 resultDecimal = 0;
-                for (int i = valor.Length-1; i >= 0; i--)
+                for (int i = valor.Length - 1; i >= 0; i--)
                 {
                     if (int.TryParse(valor[i].ToString(), out unNumero) == true)
                     {
@@ -165,41 +166,44 @@ namespace Entidades
         /// <param name="valor">un numero </param>
         /// <returns> un número decimal a binario Caso contrario retornará
         /// "-1" </returns>
-        private string DecimalBinario(int valor)
+        private static string DecimalBinario(int valor)
         {
             StringBuilder result = new StringBuilder();
             int resultadoDeLadivision;
             int resultadoDeLaMultiplicacion;
             char[] arr = null;
 
-            
-            do
+            if (valor > 0)
             {
-                resultadoDeLadivision = valor / 2;
-                resultadoDeLaMultiplicacion = 2 * resultadoDeLadivision;
-                result.Append(valor - resultadoDeLaMultiplicacion);
-                valor = resultadoDeLadivision;
-
-                if (valor == 0 || valor == 1)
+                do
                 {
-                    result.Append(valor);
-                    arr = result.ToString().ToCharArray();
-                    Array.Reverse(arr);
-                    break;
-                }
+                    resultadoDeLadivision = valor / 2;
+                    resultadoDeLaMultiplicacion = 2 * resultadoDeLadivision;
+                    result.Append(valor - resultadoDeLaMultiplicacion);
+                    valor = resultadoDeLadivision;
 
-            } while (true);
-            
+                    if (valor == 0 || valor == 1)
+                    {
+                        result.Append(valor);
+                        arr = result.ToString().ToCharArray();
+                        Array.Reverse(arr);
+                        break;
+                    }
+
+                } while (true);
+            }
+
 
             return new string(arr);
         }
+
         /// <summary>
         /// Verifica si el valor de numeracion coincide con el sistema pasado por parametro
         /// </summary>
         /// <param name="unSitemaNumerico"></param>
         /// <param name="unNumero"></param>
         /// <returns>(true) en caso de que coincida , (False) de caso contrario </returns>
-        public static bool operator == (ESistema unSitemaNumerico, Numeracion unNumero)
+        public static bool operator ==(ESistema unSitemaNumerico, Numeracion unNumero)
         {
             bool respuesta;
             respuesta = unSitemaNumerico == ESistema.Decimal && unNumero.sistema == ESistema.Decimal;
@@ -217,7 +221,7 @@ namespace Entidades
         /// <param name="unSitemaNumerico"></param>
         /// <param name="unNumero"></param>
         /// <returns>(true) en caso de que coincida , (False) de caso contrario </returns>
-        public static bool operator != (ESistema unSitemaNumerico, Numeracion primerOperador)
+        public static bool operator !=(ESistema unSitemaNumerico, Numeracion primerOperador)
         {
             return !(unSitemaNumerico == primerOperador);
         }
@@ -234,8 +238,8 @@ namespace Entidades
         {
             ESistema sistema;
             Numeracion resultado = null;
-            
-            if (primerOperador.sistema == segundoOperador.sistema)
+
+            if (primerOperador == segundoOperador)
             {
                 sistema = primerOperador.sistema;
                 resultado = new Numeracion(primerOperador.valorNumerico + segundoOperador.valorNumerico, sistema);
@@ -256,7 +260,7 @@ namespace Entidades
             ESistema sistema;
             Numeracion resultado = null;
 
-            if (primerOperador.sistema == segundoOperador.sistema)
+            if (primerOperador == segundoOperador)
             {
                 sistema = primerOperador.sistema;
                 resultado = new Numeracion(primerOperador.valorNumerico - segundoOperador.valorNumerico, sistema);
@@ -277,7 +281,7 @@ namespace Entidades
             ESistema sistema;
             Numeracion resultado = null;
 
-            if (primerOperador.sistema == segundoOperador.sistema)
+            if (primerOperador == segundoOperador)
             {
                 sistema = primerOperador.sistema;
                 resultado = new Numeracion(primerOperador.valorNumerico * segundoOperador.valorNumerico, sistema);
@@ -297,7 +301,7 @@ namespace Entidades
             ESistema sistema;
             Numeracion resultado = null;
 
-            if (primerOperador.sistema == segundoOperador.sistema && segundoOperador.valorNumerico != 0)
+            if (primerOperador == segundoOperador && segundoOperador.valorNumerico != 0)
             {
                 sistema = primerOperador.sistema;
                 resultado = new Numeracion(primerOperador.valorNumerico / segundoOperador.valorNumerico, sistema);
@@ -308,7 +312,7 @@ namespace Entidades
 
         /// <summary>
         /// compara si los dos operadores pasados por parametro , son iguales.
-        /// Comparando el valor de numeracion y el sistema
+        /// Comparando el sistema
         /// </summary>
         /// <param name="primerOperador"></param>
         /// <param name="segundoOperador"></param>
@@ -316,8 +320,7 @@ namespace Entidades
         public static bool operator ==(Numeracion primerOperador, Numeracion segundoOperador)
         {
             return primerOperador is not null && segundoOperador is not null &&
-             primerOperador.valorNumerico == segundoOperador.valorNumerico &&
-             primerOperador.sistema == segundoOperador.sistema;
+                    primerOperador.sistema == segundoOperador.sistema;
         }
         /// <summary>
         /// compara si los dos operadores pasados por parametro , son distintos.
@@ -334,13 +337,15 @@ namespace Entidades
 
         public string ValorNumerico
         {
-            get {
-                string resultado ;
+            get
+            {
+                string resultado;
                 resultado = ConvertirA(this.sistema);
                 return resultado;
             }
         }
-        public ESistema Sistema {
+        public ESistema Sistema
+        {
 
             get
             {

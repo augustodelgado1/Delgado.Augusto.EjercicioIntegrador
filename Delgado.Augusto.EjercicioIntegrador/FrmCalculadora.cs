@@ -18,30 +18,31 @@ namespace Delgado.Augusto.EjercicioIntegrador
         private Numeracion resultado;
         private Numeracion primerOperando;
         private Numeracion segundoOperando;
-        private StringBuilder mensaje;
+        private const string resultadoConst = "Resultado:";
         public FrmCalculadora()
         {
             InitializeComponent();
-            this.unErrorProvider.Icon = SystemIcons.Error;
         }
 
         private void FrmCalculadora_Load(object sender, EventArgs e)
         {
-            mensaje = new StringBuilder();
+            this.unErrorProvider.Icon = SystemIcons.Error;
             this.CargarCmbItems(this.cmbOperacion.Items, listaDeOperadores);
+            this.calculadora = new Operacion(primerOperando, segundoOperando);
             this.rdbDecimal.Checked = true;
-            this.lblResultado.Visible = false;
+            this.lblResultado.Text = resultadoConst;
         }
 
         private void btnOperar_Click(object sender, EventArgs e)
-        {   
+        {
             if (ActivarErrorProvider(this.cmbOperacion, "Elija un operador", unControl => unControl is not null && string.IsNullOrWhiteSpace(unControl.Text) == false)
              && ActivarErrorProvider(this.txtPrimerOperador, "Ingrese un numero valido", unControl => unControl is not null && double.TryParse(unControl.Text, out double primerNumero))
              && ActivarErrorProvider(this.txtSegundoOperador, "Ingrese un numero valido", unControl => unControl is not null && double.TryParse(unControl.Text, out double primerNumero))
              && (primerOperando = new Numeracion(txtPrimerOperador.Text, ESistema.Decimal)) is not null
              && (segundoOperando = new Numeracion(txtSegundoOperador.Text, ESistema.Decimal)) is not null)
             {
-                this.calculadora = new Operacion(primerOperando, segundoOperando);
+                this.calculadora.PrimerOperador = primerOperando;
+                this.calculadora.SegundoOperador = segundoOperando;
                 this.resultado = calculadora.Operador((char)cmbOperacion.SelectedItem);
                 this.SetResultado();
             }
@@ -50,11 +51,11 @@ namespace Delgado.Augusto.EjercicioIntegrador
         {
             this.LimpiarListaDeTextBox(this.Controls);
             this.unErrorProvider.Clear();
-            this.lblResultado.Visible = false;
 
             if (resultado is not null)
             {
                 resultado = null;
+                this.lblResultado.Text = resultadoConst;
                 this.primerOperando = null;
                 this.segundoOperando = null;
             }
@@ -67,7 +68,7 @@ namespace Delgado.Augusto.EjercicioIntegrador
 
         private void FrmCalculadora_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = ConfirmarSalida("¿Desea cerrar la calculadora?", "Salida"); 
+            e.Cancel = ConfirmarSalida("¿Desea cerrar la calculadora?", "Salida");
         }
 
         private void txtPrimerOperador_TextChanged(object sender, EventArgs e)
@@ -96,6 +97,11 @@ namespace Delgado.Augusto.EjercicioIntegrador
                 SetResultado();
             }
 
+        }
+
+        private void cmbOperacion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ActivarErrorProvider(this.cmbOperacion, "Ingrese un operador valido", unControl => string.IsNullOrWhiteSpace(unControl.Text) == false);
         }
 
 
@@ -189,52 +195,27 @@ namespace Delgado.Augusto.EjercicioIntegrador
             }
 
             return resultado;
-        } 
-        
+        }
+
         /// <summary>
         /// muestra el resultado de la operación, 
         /// convertido de acuerdo con el sistema numérico seleccionado
         /// </summary>
         private void SetResultado()
         {
-            mensaje.Clear();
-            mensaje.AppendLine("No se pudo realizar la operacion");
             if (this.resultado is not null)
             {
                 if (this.sistema != this.resultado)
                 {
                     this.resultado.ConvertirA(sistema);
                 }
-                
-                mensaje.Clear();
-                mensaje.AppendLine($"Resultado : {this.resultado.ValorNumerico}");
+                this.lblResultado.Visible = true;
+                this.lblResultado.Text = $"{resultadoConst} {this.resultado.ValorNumerico}";
             }
-            this.lblResultado.Visible = true;
-            this.lblResultado.Text = mensaje.ToString();
         }
 
-        private void cmbOperacion_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ActivarErrorProvider(this.cmbOperacion, "Ingrese un operador valido", unControl => string.IsNullOrWhiteSpace(unControl.Text) == false);
-        }
+
 
         #endregion
-
-
-
-
-
-        /*    
-    7. El TabIndex debe darse de izquierda a derecha y de arriba hacia abajo, siendo
-            txtNumero1 el índice más bajo y los radioButtons el más alto.
-    Y el siguiente diagrama de clases:
-
-    9. El método Limpiar será llamado por el evento click del botón btnLimpiar, este
-    borrará los datos de los TextBox, Label de resultado de la pantalla y también
-    asignará null al atributo resultado del formulario.
-
-    10. El método setResultado mostrara el resultado de la operación, convertido de
-    acuerdo al sistema numérico seleccionado, siempre y cuando este no sea nulo.
-    12. Los radioButtons de Sistema.*/
     }
 }

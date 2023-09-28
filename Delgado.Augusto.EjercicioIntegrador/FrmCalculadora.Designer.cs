@@ -49,10 +49,10 @@
             // 
             // btnOperar
             // 
-            btnOperar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnOperar.Location = new Point(12, 289);
+            btnOperar.Anchor = AnchorStyles.None;
+            btnOperar.Location = new Point(2, 292);
             btnOperar.Name = "btnOperar";
-            btnOperar.Size = new Size(184, 40);
+            btnOperar.Size = new Size(179, 40);
             btnOperar.TabIndex = 3;
             btnOperar.Text = "Operar";
             btnOperar.UseVisualStyleBackColor = true;
@@ -60,8 +60,8 @@
             // 
             // btnLimpiar
             // 
-            btnLimpiar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            btnLimpiar.Location = new Point(317, 289);
+            btnLimpiar.Anchor = AnchorStyles.None;
+            btnLimpiar.Location = new Point(208, 292);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(179, 40);
             btnLimpiar.TabIndex = 4;
@@ -71,8 +71,8 @@
             // 
             // btnCerrar
             // 
-            btnCerrar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            btnCerrar.Location = new Point(617, 289);
+            btnCerrar.Anchor = AnchorStyles.None;
+            btnCerrar.Location = new Point(422, 292);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(179, 40);
             btnCerrar.TabIndex = 5;
@@ -88,7 +88,7 @@
             cmbOperacion.FlatStyle = FlatStyle.System;
             cmbOperacion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             cmbOperacion.FormattingEnabled = true;
-            cmbOperacion.Location = new Point(317, 243);
+            cmbOperacion.Location = new Point(208, 247);
             cmbOperacion.Name = "cmbOperacion";
             cmbOperacion.Size = new Size(179, 29);
             cmbOperacion.TabIndex = 1;
@@ -98,7 +98,7 @@
             // 
             lblResultado.AutoSize = true;
             lblResultado.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblResultado.Location = new Point(12, 20);
+            lblResultado.Location = new Point(2, 9);
             lblResultado.Name = "lblResultado";
             lblResultado.Size = new Size(145, 37);
             lblResultado.TabIndex = 4;
@@ -106,10 +106,10 @@
             // 
             // lblPrimerOperador
             // 
-            lblPrimerOperador.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lblPrimerOperador.Anchor = AnchorStyles.None;
             lblPrimerOperador.AutoSize = true;
             lblPrimerOperador.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblPrimerOperador.Location = new Point(12, 204);
+            lblPrimerOperador.Location = new Point(2, 207);
             lblPrimerOperador.Name = "lblPrimerOperador";
             lblPrimerOperador.Size = new Size(163, 25);
             lblPrimerOperador.TabIndex = 5;
@@ -120,7 +120,7 @@
             lblOperacion.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lblOperacion.AutoSize = true;
             lblOperacion.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblOperacion.Location = new Point(353, 204);
+            lblOperacion.Location = new Point(242, 207);
             lblOperacion.Name = "lblOperacion";
             lblOperacion.Size = new Size(104, 25);
             lblOperacion.TabIndex = 6;
@@ -128,10 +128,10 @@
             // 
             // lblSegundoOperador
             // 
-            lblSegundoOperador.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            lblSegundoOperador.Anchor = AnchorStyles.None;
             lblSegundoOperador.AutoSize = true;
             lblSegundoOperador.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblSegundoOperador.Location = new Point(612, 204);
+            lblSegundoOperador.Location = new Point(422, 207);
             lblSegundoOperador.Name = "lblSegundoOperador";
             lblSegundoOperador.Size = new Size(184, 25);
             lblSegundoOperador.TabIndex = 7;
@@ -141,7 +141,8 @@
             // 
             grpSistema.Controls.Add(rdbBinario);
             grpSistema.Controls.Add(rdbDecimal);
-            grpSistema.Location = new Point(283, 80);
+            grpSistema.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            grpSistema.Location = new Point(161, 93);
             grpSistema.Name = "grpSistema";
             grpSistema.Size = new Size(251, 78);
             grpSistema.TabIndex = 8;
@@ -177,8 +178,9 @@
             // 
             // txtSegundoOperador
             // 
-            txtSegundoOperador.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txtSegundoOperador.Location = new Point(617, 243);
+            txtSegundoOperador.Anchor = AnchorStyles.None;
+            unErrorProvider.SetIconAlignment(txtSegundoOperador, ErrorIconAlignment.TopLeft);
+            txtSegundoOperador.Location = new Point(422, 247);
             txtSegundoOperador.Name = "txtSegundoOperador";
             txtSegundoOperador.Size = new Size(179, 23);
             txtSegundoOperador.TabIndex = 2;
@@ -186,8 +188,8 @@
             // 
             // txtPrimerOperador
             // 
-            txtPrimerOperador.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txtPrimerOperador.Location = new Point(12, 244);
+            txtPrimerOperador.Anchor = AnchorStyles.None;
+            txtPrimerOperador.Location = new Point(2, 247);
             txtPrimerOperador.Name = "txtPrimerOperador";
             txtPrimerOperador.Size = new Size(179, 23);
             txtPrimerOperador.TabIndex = 0;
@@ -202,7 +204,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(818, 341);
+            ClientSize = new Size(613, 344);
             Controls.Add(txtPrimerOperador);
             Controls.Add(txtSegundoOperador);
             Controls.Add(grpSistema);

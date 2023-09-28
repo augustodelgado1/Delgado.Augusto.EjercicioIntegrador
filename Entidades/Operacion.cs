@@ -12,7 +12,7 @@ namespace Entidades
         private Numeracion segundoOperador;
 
         /// <summary>
-        /// es el contructor de la clase que inicializa los atributos
+        /// es el contructor de la clase que inicializa el valor de los atributos
         /// </summary>
         /// <param name="primerOperador"></param>
         /// <param name="segundoOperador"></param>
@@ -58,11 +58,11 @@ namespace Entidades
 
 
 
-        public Numeracion PrimerOperador { get { return primerOperador; }  set { primerOperador = value; }  }
-        
-        
+        public Numeracion PrimerOperador { get { return primerOperador; } set { primerOperador = value; } }
+
+
         public Numeracion SegundoOperador { get { return segundoOperador; } set { segundoOperador = value; } }
 
-       
+
     }
 }
