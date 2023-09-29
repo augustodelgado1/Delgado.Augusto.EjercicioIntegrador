@@ -10,11 +10,12 @@ namespace pruebas
             Numeracion otroNumero = new Numeracion("-14", ESistema.Binario);
             Numeracion tercerNumero = new Numeracion("100", ESistema.Decimal);
             Numeracion cuartoNumero = new Numeracion("100", ESistema.Decimal);
-            Console.WriteLine(cuartoNumero.ValorNumerico);
+          /*  Console.WriteLine(cuartoNumero.ValorNumerico);
             Console.WriteLine(otroNumero.Sistema);
             tercerNumero.ConvertirA(ESistema.Decimal);
             Console.WriteLine(tercerNumero.ValorNumerico);
-            Console.WriteLine((tercerNumero + cuartoNumero).ValorNumerico);
+            Console.WriteLine((tercerNumero + cuartoNumero).ValorNumerico);*/
+            Console.WriteLine(new Operacion(otroNumero, tercerNumero));
             Console.ReadKey();
             /*    unNumero += otroNumero;
                 new string(unNumero.ValorNumerico);

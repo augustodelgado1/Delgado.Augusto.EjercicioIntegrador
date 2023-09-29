@@ -18,8 +18,8 @@ namespace Entidades
         /// <param name="segundoOperador"></param>
         public Operacion(Numeracion primerOperador, Numeracion segundoOperador)
         {
-            this.primerOperador = primerOperador;
-            this.segundoOperador = segundoOperador;
+            this.PrimerOperador = primerOperador;
+            this.SegundoOperador = segundoOperador;
         }
 
         /// <summary>
@@ -58,10 +58,27 @@ namespace Entidades
 
 
 
-        public Numeracion PrimerOperador { get { return primerOperador; } set { primerOperador = value; } }
+        public Numeracion PrimerOperador { get { return primerOperador; } 
+            
+            set {
+                if (value is not null && (value == segundoOperador || segundoOperador is null))
+                {
+                    primerOperador = value;
+                } 
+            } 
+        }
 
 
-        public Numeracion SegundoOperador { get { return segundoOperador; } set { segundoOperador = value; } }
+        public Numeracion SegundoOperador { get { return segundoOperador; }
+            
+            set
+            {
+                if (value is not null && (value == primerOperador || primerOperador is null))
+                {
+                    segundoOperador = value;
+                }
+            }
+        }
 
 
     }

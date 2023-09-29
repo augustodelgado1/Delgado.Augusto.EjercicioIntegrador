@@ -209,7 +209,6 @@ namespace Delgado.Augusto.EjercicioIntegrador
                 {
                     this.resultado.ConvertirA(sistema);
                 }
-                this.lblResultado.Visible = true;
                 this.lblResultado.Text = $"{resultadoConst} {this.resultado.ValorNumerico}";
             }
         }
