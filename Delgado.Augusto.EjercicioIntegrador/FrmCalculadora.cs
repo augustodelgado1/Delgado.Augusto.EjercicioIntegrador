@@ -203,14 +203,22 @@ namespace Delgado.Augusto.EjercicioIntegrador
         /// </summary>
         private void SetResultado()
         {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine($"{resultadoConst}");
             if (this.resultado is not null)
             {
-                if (this.sistema != this.resultado)
+                stringBuilder.Clear();
+                stringBuilder.AppendLine("No se pudo realizar la conversion");
+
+                if ((this.sistema != this.resultado 
+                && string.IsNullOrWhiteSpace(this.resultado.ConvertirA(sistema)) == false)
+                || (this.sistema == this.resultado))
                 {
-                    this.resultado.ConvertirA(sistema);
+                      stringBuilder.Clear();
+                      stringBuilder.AppendLine($"{resultadoConst} {this.resultado.ValorNumerico}");
                 }
-                this.lblResultado.Text = $"{resultadoConst} {this.resultado.ValorNumerico}";
             }
+            this.lblResultado.Text = stringBuilder.ToString();
         }
 
 

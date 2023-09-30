@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\Desktop\\capa\\Delgado.Augusto.EjercicioIntegrador\\pruebas\\pruebas.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\Desktop\\new\\Delgado.Augusto.EjercicioIntegrador\\pruebas\\pruebas.csproj",
       "projectName": "pruebas",
-      "projectPath": "C:\\Users\\PC\\Desktop\\capa\\Delgado.Augusto.EjercicioIntegrador\\pruebas\\pruebas.csproj",
+      "projectPath": "C:\\Users\\PC\\Desktop\\new\\Delgado.Augusto.EjercicioIntegrador\\pruebas\\pruebas.csproj",
       "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\Desktop\\capa\\Delgado.Augusto.EjercicioIntegrador\\pruebas\\obj\\",
+      "outputPath": "C:\\Users\\PC\\Desktop\\new\\Delgado.Augusto.EjercicioIntegrador\\pruebas\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -53,8 +53,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\PC\\Desktop\\capa\\Delgado.Augusto.EjercicioIntegrador\\Entidades\\Entidades.csproj": {
-              "projectPath": "C:\\Users\\PC\\Desktop\\capa\\Delgado.Augusto.EjercicioIntegrador\\Entidades\\Entidades.csproj"
+            "C:\\Users\\PC\\Desktop\\new\\Delgado.Augusto.EjercicioIntegrador\\Entidades\\Entidades.csproj": {
+              "projectPath": "C:\\Users\\PC\\Desktop\\new\\Delgado.Augusto.EjercicioIntegrador\\Entidades\\Entidades.csproj"
             }
           }
         }

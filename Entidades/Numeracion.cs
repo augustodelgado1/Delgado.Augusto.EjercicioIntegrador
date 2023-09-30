@@ -62,23 +62,21 @@ namespace Entidades
         /// 
         /// </summary>
         /// <param name="sistema"> el sistema de numeracion (Decimal o Binario) </param>
-        /// <returns> una cadena representada en un sistema de numeración  </returns>
+        /// <returns> una cadena representada en un sistema de numeración 
+        ///, si no se pudo realizar la conversion develve null  </returns>
         public string ConvertirA(ESistema sistema)
         {
-            string result = null;
+            string result;
 
-            if (sistema == ESistema.Decimal)
+            result = this.valorNumerico.ToString();
+            this.sistema = ESistema.Decimal;
+
+            if (sistema == ESistema.Binario
+            && (result = DecimalBinario((int)this.valorNumerico)) is not null)
             {
-                result = this.valorNumerico.ToString();
+                this.sistema = sistema;
             }
-            else
-            {
-                if (sistema == ESistema.Binario)
-                {
-                    result = DecimalBinario((int)this.valorNumerico);
-                }
-            }
-            this.sistema = sistema;
+            
 
             return result;
 
@@ -172,29 +170,31 @@ namespace Entidades
             int resultadoDeLadivision;
             int resultadoDeLaMultiplicacion;
             char[] arr = null;
+            string retornoStr = null;
 
-            if (valor > 0)
+            if (valor >= 0)
             {
                 do
                 {
-                    resultadoDeLadivision = valor / 2;
-                    resultadoDeLaMultiplicacion = 2 * resultadoDeLadivision;
-                    result.Append(valor - resultadoDeLaMultiplicacion);
-                    valor = resultadoDeLadivision;
-
                     if (valor == 0 || valor == 1)
                     {
                         result.Append(valor);
                         arr = result.ToString().ToCharArray();
                         Array.Reverse(arr);
+                        retornoStr = new string(arr);
                         break;
                     }
+
+                    resultadoDeLadivision = valor / 2;
+                    resultadoDeLaMultiplicacion = 2 * resultadoDeLadivision;
+                    result.Append(valor - resultadoDeLaMultiplicacion);
+                    valor = resultadoDeLadivision;
 
                 } while (true);
             }
 
 
-            return new string(arr);
+            return retornoStr;
         }
 
         /// <summary>
@@ -340,7 +340,7 @@ namespace Entidades
             get
             {
                 string resultado;
-                resultado = ConvertirA(this.sistema);
+                resultado = this.ConvertirA(this.sistema);
                 return resultado;
             }
         }
