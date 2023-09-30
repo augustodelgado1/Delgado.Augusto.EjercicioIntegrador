@@ -210,12 +210,12 @@ namespace Delgado.Augusto.EjercicioIntegrador
                 stringBuilder.Clear();
                 stringBuilder.AppendLine("No se pudo realizar la conversion");
 
-                if ((this.sistema != this.resultado 
+                if ((this.sistema != this.resultado
                 && string.IsNullOrWhiteSpace(this.resultado.ConvertirA(sistema)) == false)
                 || (this.sistema == this.resultado))
                 {
-                      stringBuilder.Clear();
-                      stringBuilder.AppendLine($"{resultadoConst} {this.resultado.ValorNumerico}");
+                    stringBuilder.Clear();
+                    stringBuilder.AppendLine($"{resultadoConst} {this.resultado.ValorNumerico}");
                 }
             }
             this.lblResultado.Text = stringBuilder.ToString();
